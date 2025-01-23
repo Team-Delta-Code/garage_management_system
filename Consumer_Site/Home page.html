@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ushan Motors - Your Automotive Partner</title>
+    <style>
+      /* Reset default styles and set up base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+      /* Background image */
+      body {
+        background: url("imagers/Home background.png") no-repeat center center
+          fixed;
+        background-size: cover; /* Make sure the image covers the entire screen */
+      }
+      /* Main navigation styles */
+      .nav-container {
+        background-color: #1a237e; /* Deep blue color for nav */
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed; /* Keep nav fixed at top */
+        width: 100%;
+        z-index: 1000; /* Ensure nav stays on top */
+      }
+
+      /* Logo and badge container */
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      /* 25 Years badge styling */
+      .year-badge {
+        width: 50px; /* Adjusted size */
+        height: 50px; /* Adjusted size */
+        background-color: rgb(0, 0, 0);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.2;
+        position: absolute; /* Positioning */
+        top: 10px; /* Adjusted position */
+        left: 10px; /* Adjusted position */
+      }
+
+      .year-badge img {
+        width: 100%;
+      }
+
+      /* Company name styling */
+      .company-name {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      /* Navigation menu links */
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+      .nav-menu a:hover {
+        color: #b3c0ff; /* Lighter blue on hover */
+      }
+
+      /* Hero section styling */
+      .hero-section {
+        height: 100vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("/api/placeholder/1920/1080"); /* Replace with actual image */
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        padding: 20px;
+      }
+
+      /* Welcome text styling */
+      .hero-title {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 40px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Start button styling */
+      .start-btn {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 15px 60px;
+        border-radius: 30px;
+        font-size: 1.5rem;
+        border: 2px solid white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        margin-top: 200px;
+      }
+
+      .start-btn:hover {
+        background-color: white;
+        color: #1a237e;
+      }
+
+      /* Footer styling */
+      .footer {
+        background-color: #1a237e;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none; /* Hide menu on mobile - would need hamburger menu */
+        }
+
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .year-badge {
+          width: 50px;
+          height: 50px;
+          font-size: 0.7rem;
+        }
+
+        .company-name {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="nav-container">
+      <div class="logo-section">
+        <!-- 25 Years badge -->
+        <div class="year-badge">
+          <img src="imagers/25 years.png" alt="logo" />
+        </div>
+        <!-- Company name -->
+        <div class="company-name">Ushan Motors</div>
+      </div>
+      <!-- Navigation menu -->
+      <div class="nav-menu">
+        <a href="#home">Home</a>
+        <a href="service page.html">Service</a>
+        <a href="about page.html">About</a>
+        <a href="contact page.html">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Hero section -->
+    <section class="hero-section">
+      <h1 class="hero-title">Welcome to Ushan Motors</h1>
+      <p class="hero-subtitle">Your one-stop for all automotive needs</p>
+      <a href="service page.html" class="start-btn">START BROWSE</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2024 Ushan Motors. All Rights Reserved</p>
+    </footer>
+  </body>
+</html>

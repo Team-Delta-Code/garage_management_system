@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Ushan Motors</title>
+    <style>
+      /* Reset default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Body styles with gradient background */
+      body {
+        background: #a5b4fc;
+        min-height: 100vh;
+        color: #333;
+      }
+
+      /*style for header*/
+      /* Reset default styles and set up base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Main navigation styles */
+      .nav-container {
+        background-color: #1a237e; /* Deep blue color for nav */
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed; /* Keep nav fixed at top */
+        width: 100%;
+        z-index: 1000; /* Ensure nav stays on top */
+      }
+
+      /* Logo and badge container */
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      /* 25 Years badge styling */
+      .year-badge {
+        width: 50px; /* Adjusted size */
+        height: 50px; /* Adjusted size */
+        background-color: rgb(0, 0, 0);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.2;
+        position: absolute; /* Positioning */
+        top: 10px; /* Adjusted position */
+        left: 10px; /* Adjusted position */
+      }
+
+      .year-badge img {
+        width: 100%;
+      }
+
+      /* Company name styling */
+      .company-name {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      /* Navigation menu links */
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+      .main-content {
+        padding: 6rem 5%;
+      }
+
+      /* Navigation menu */
+      nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+      }
+
+      /* Main content area */
+      main {
+        padding: 2rem 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Contact page title */
+      .page-title {
+        font-size: 2.5rem;
+        color: #ffffff;
+        margin-bottom: 2rem;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      /* Contact information container */
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      /* Contact info and business hours sections */
+      .contact-info,
+      .business-hours,
+      .contact-form {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 2rem;
+      }
+
+      /* Contact details styling */
+      .contact-info h2,
+      .business-hours h2,
+      .contact-form h2 {
+        color: #1a237e;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+      }
+
+      .contact-details {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* Business hours table */
+      .hours-table {
+        width: 100%;
+      }
+
+      .hours-table td {
+        padding: 0.5rem 0;
+      }
+
+      /* Contact form styles */
+      .contact-form form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .form-input {
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      textarea.form-input {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        background-color: #1a237e;
+        color: white;
+        padding: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+      }
+
+      .submit-btn:hover {
+        background-color: #283593;
+      }
+
+      /* Footer styles */
+      footer {
+        background-color: #1a237e;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
+
+        nav ul {
+          gap: 1rem;
+        }
+
+        .page-title {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="nav-container">
+      <div class="logo-section">
+        <!-- 25 Years badge -->
+        <div class="year-badge">
+          <img src="imagers/25 years.png" alt="logo" />
+        </div>
+        <!-- Company name -->
+        <div class="company-name">Ushan Motors</div>
+      </div>
+      <!-- Navigation menu -->
+      <div class="nav-menu">
+        <a href="Home page.html">Home</a>
+        <a href="service page.html">Service</a>
+        <a href="about page.html">About</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <main>
+      <h1 class="page-title">Contact Ushan Motors</h1>
+
+      <div class="contact-container">
+        <div class="contact-info">
+          <h2>Get in touch</h2>
+          <div class="contact-details">
+            <div class="contact-item">
+              📞 Phone: (+94)783566928 / (+94)776174945
+            </div>
+            <div class="contact-item">
+              🏠 Address: No 04, School Lane, Piliyandala
+            </div>
+          </div>
+        </div>
+
+        <div class="business-hours">
+          <h2>Business Hours</h2>
+          <table class="hours-table">
+            <tr>
+              <td>Monday - Saturday:</td>
+              <td>8:00 am - 7:00 pm</td>
+            </tr>
+            <tr>
+              <td>Sunday:</td>
+              <td>9:00 am - 4:00 pm</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="contact-form">
+          <h2>Send us a message</h2>
+          <form>
+            <input type="text" placeholder="your name" class="form-input" />
+            <input type="email" placeholder="Your e-mail" class="form-input" />
+            <textarea placeholder="Your message" class="form-input"></textarea>
+            <input
+              type="tel"
+              placeholder="Your phone number"
+              class="form-input"
+            />
+            <button type="submit" class="submit-btn">Send message</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Ushan Motors. All Rights Reserved</p>
+    </footer>
+  </body>
+</html>

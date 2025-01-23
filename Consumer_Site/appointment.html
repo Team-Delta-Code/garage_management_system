@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Booking - Ushan Motors</title>
+    <style>
+      /* Reset default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Header styles */
+      header {
+        background-color: #1a1464;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .brand-name {
+        color: white;
+        font-size: 2rem;
+        text-decoration: none;
+      }
+
+      /* Navigation styles */
+      nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+      }
+
+      /* Main content styles */
+      .main-content {
+        background-color: #e8eaf6;
+        min-height: calc(100vh - 120px);
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      /* Booking form container */
+      .booking-container {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        gap: 2rem;
+      }
+
+      /* Form section styles */
+      .form-section {
+        flex: 2;
+        padding: 2rem;
+      }
+
+      .form-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: #000;
+      }
+
+      /* Form field styles */
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+      }
+
+      /* Notice box styles */
+      .notice-box {
+        background-color: #fff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      /* Button styles */
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .btn-confirm {
+        background-color: #1a1464;
+        color: white;
+      }
+
+      .btn-cancel {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .btn:hover {
+        opacity: 0.9;
+      }
+
+      /* Illustration section styles */
+      .illustration-section {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .illustration-section img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Footer styles */
+      footer {
+        background-color: #1a1464;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .booking-container {
+          flex-direction: column;
+        }
+
+        .form-section {
+          padding: 1rem;
+        }
+
+        .illustration-section {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header with navigation -->
+    <header>
+      <a href="/" class="brand-name">Ushan Motors</a>
+      <nav>
+        <ul>
+          <li><a href="Home page.html">Home</a></li>
+          <li><a href="service page.html">Service</a></li>
+          <li><a href="about page.html">About</a></li>
+          <li><a href="contact page.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main content area -->
+    <div class="main-content">
+      <div class="booking-container">
+        <!-- Booking form section -->
+        <section class="form-section">
+          <h1>Appointment booking.</h1>
+          <form id="booking-form">
+            <div class="form-group">
+              <label for="customer-name">Customer name</label>
+              <input type="text" id="customer-name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="service">Service</label>
+              <select id="service" required>
+                <option value="">--Select--</option>
+                <option value="full-service">Full Service</option>
+                <option value="body-wash">Body Wash</option>
+                <option value="engine-repair">Engine Repair</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contact">Contact number</label>
+              <input type="tel" id="contact" required />
+            </div>
+
+            <!-- Booking notice -->
+            <div class="notice-box">
+              Thank you for choosing our service. To confirm your appointment
+              there is booking fee of 500. LKR which secure your time slot to
+              ensure your prevented time slot, please proceed by clicking
+              confirm to complete your booking and payment.
+            </div>
+
+            <!-- Action buttons -->
+            <div class="button-group">
+              <button type="submit" class="btn btn-confirm">Confirm</button>
+              <button type="button" class="btn btn-cancel">Cancel</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Illustration section -->
+        <section class="illustration-section">
+          <img src="booking-illustration.png" alt="Booking illustration" />
+        </section>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>© 2024 Ushan Motors. All Rights Reserved</footer>
+  </body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ushan Motors - Automotive Services</title>
+    <style>
+      /* Reset default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Body background with gradient */
+      body {
+        background: #a5b4fc;
+        min-height: 100vh;
+        color: #333;
+      }
+      /*style for header*/
+      /* Reset default styles and set up base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Main navigation styles */
+      .nav-container {
+        background-color: #1a237e; /* Deep blue color for nav */
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed; /* Keep nav fixed at top */
+        width: 100%;
+        z-index: 1000; /* Ensure nav stays on top */
+      }
+
+      /* Logo and badge container */
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      /* 25 Years badge styling */
+      .year-badge {
+        width: 50px; /* Adjusted size */
+        height: 50px; /* Adjusted size */
+        background-color: rgb(0, 0, 0);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.2;
+        position: absolute; /* Positioning */
+        top: 10px; /* Adjusted position */
+        left: 10px; /* Adjusted position */
+      }
+
+      .year-badge img {
+        width: 100%;
+      }
+
+      /* Company name styling */
+      .company-name {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      /* Navigation menu links */
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+      .main-content {
+        padding: 6rem 5%;
+      }
+
+      /* About section */
+      .about-section {
+        background-color: rgba(255, 255, 255, 0.9);
+
+        padding: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .about-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: #1a237e;
+        margin-top: 120px;
+      }
+
+      /* Info cards container */
+      .info-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      /* Individual info cards */
+      .info-card {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .info-card h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #1a237e;
+      }
+
+      /* Footer styles */
+      footer {
+        background-color: #1a237e;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+
+      /* About us icon */
+      .about-icon {
+        width: 100px;
+        margin: 2rem auto;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .info-cards {
+          grid-template-columns: 1fr;
+        }
+
+        nav ul {
+          gap: 1rem;
+        }
+
+        .about-section h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="nav-container">
+      <div class="logo-section">
+        <!-- 25 Years badge -->
+        <div class="year-badge">
+          <img src="imagers/25 years.png" alt="logo" />
+        </div>
+        <!-- Company name -->
+        <div class="company-name">Ushan Motors</div>
+      </div>
+      <!-- Navigation menu -->
+      <div class="nav-menu">
+        <a href="Home page.html">Home</a>
+        <a href="service page.html">Service</a>
+        <a href="#">About</a>
+        <a href="contact page.html">Contact</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="about-section">
+        <h1>About Ushan Motors</h1>
+        <p>
+          Founded in 2000, Ushan Motors has been a trusted name in automotive
+          repair and maintains our team of skills. Mechanic brings years of
+          experience and commitment to quality service.
+        </p>
+      </section>
+
+      <div class="info-cards">
+        <div class="info-card">
+          <h2>Why choose us?</h2>
+          <p>
+            Certified and experienced mechanic State of the Art diagnostics,
+            equipment transference, pricing, Quick and reliable size.
+          </p>
+        </div>
+        <div class="info-card">
+          <h2>Our mission</h2>
+          <p>
+            To provide top quality automotive services with integrity,
+            transparency and customer certification as our primary goal.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Ushan Motors. All Rights Reserved</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ushan Motors - Your Automotive Partner</title>
+    <style>
+      /* Reset default styles and set up base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Main navigation styles */
+      .nav-container {
+        background-color: #1a237e; /* Deep blue color for nav */
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed; /* Keep nav fixed at top */
+        width: 100%;
+        z-index: 1000; /* Ensure nav stays on top */
+      }
+
+      /* Logo and badge container */
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      /* 25 Years badge styling */
+      .year-badge {
+        width: 50px; /* Adjusted size */
+        height: 50px; /* Adjusted size */
+        background-color: rgb(0, 0, 0);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.2;
+        position: absolute; /* Positioning */
+        top: 10px; /* Adjusted position */
+        left: 10px; /* Adjusted position */
+      }
+
+      .year-badge img {
+        width: 100%;
+      }
+
+      /* Company name styling */
+      .company-name {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      /* Navigation menu links */
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+          /* Footer styles */
+          footer {
+        background-color: #1a237e;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+      }
+
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none; /* Hide menu on mobile - would need hamburger menu */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="nav-container">
+      <div class="logo-section">
+        <!-- 25 Years badge -->
+        <div class="year-badge">
+          <img src="imagers/25 years.png" alt="logo" />
+        </div>
+        <!-- Company name -->
+        <div class="company-name">Ushan Motors</div>
+      </div>
+      <!-- Navigation menu -->
+      <div class="nav-menu">
+        <a href="#home">Home</a>
+        <a href="service page.html">Service</a>
+        <a href="about page.html">About</a>
+        <a href="contact page.html">Contact</a>
+      </div>
+    </nav>
+
+      <!-- Footer -->
+      <footer>© 2024 Ushan Motors. All Rights Reserved</footer>
+    </body>
+
+  </body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Successful - Ushan Motors</title>
+    <style>
+      /* Reset default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #a5b4fc; /* Make sure the image covers the entire screen */
+      }
+
+      /*style for header*/
+      /* Reset default styles and set up base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Main navigation styles */
+      .nav-container {
+        background-color: #1a237e; /* Deep blue color for nav */
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed; /* Keep nav fixed at top */
+        width: 100%;
+        z-index: 1000; /* Ensure nav stays on top */
+      }
+
+      /* Logo and badge container */
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      /* 25 Years badge styling */
+      .year-badge {
+        width: 50px; /* Adjusted size */
+        height: 50px; /* Adjusted size */
+        background-color: rgb(0, 0, 0);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.2;
+        position: absolute; /* Positioning */
+        top: 10px; /* Adjusted position */
+        left: 10px; /* Adjusted position */
+      }
+
+      .year-badge img {
+        width: 100%;
+      }
+
+      /* Company name styling */
+      .company-name {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      /* Navigation menu links */
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+      .main-content {
+        padding: 6rem 5%;
+      }
+
+      /* Navigation styles */
+      nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+      }
+
+      /* Main content styles */
+      .main-content {
+        background-color: #a5b4fc;
+        min-height: calc(100vh - 120px);
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Success card styles */
+      .success-card {
+        background-color: rgba(8, 0, 255, 0.108);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 3rem;
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        margin-top: 70px;
+      }
+
+      .success-card h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: #1a1464;
+      }
+
+      .confirmation-text {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        color: #333;
+      }
+
+      /* Transaction ID styles */
+      .transaction-id {
+        background-color: #f5f5f5;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        display: inline-block;
+        margin: 1.5rem 0;
+        font-size: 1.1rem;
+        color: #333;
+      }
+
+      /* Status messages */
+      .status-message {
+        margin: 1rem 0;
+        font-size: 1.1rem;
+        color: #444;
+      }
+
+      /* Download button styles */
+      .download-btn {
+        background-color: #f5f5f5;
+        color: #333;
+        padding: 0.8rem 2rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 2rem;
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .download-btn:hover {
+        background-color: #161eac6b;
+      }
+
+      /* Payment illustration styles */
+      .payment-illustration {
+        position: absolute;
+
+        top: 10rem;
+        width: 500px;
+        height: 500px;
+        opacity: 0.9;
+      }
+
+      .form-input {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      /* Footer styles */
+      footer {
+        background-color: #1a1464;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 70px;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .success-card {
+          padding: 2rem;
+          margin: 1rem;
+        }
+
+        .payment-illustration {
+          display: none;
+        }
+
+        .transaction-id {
+          font-size: 1rem;
+          padding: 0.8rem 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header with navigation -->
+    <nav class="nav-container">
+      <div class="logo-section">
+        <!-- 25 Years badge -->
+        <div class="year-badge">
+          <img src="imagers/25 years.png" alt="logo" />
+        </div>
+        <!-- Company name -->
+        <div class="company-name">Ushan Motors</div>
+      </div>
+      <!-- Navigation menu -->
+      <div class="nav-menu">
+        <a href="#home">Home</a>
+        <a href="service page.html">Service</a>
+        <a href="about page.html">About</a>
+        <a href="contact page.html">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Main content area -->
+    <div class="main-content">
+      <!-- Success message card -->
+      <div class="success-card">
+        <h1>Payment successful!</h1>
+
+        <p class="confirmation-text">
+          Thank you for your payment. Your appointment has been confirmed.
+        </p>
+
+        <input type="text" placeholder="Transaction ID" class="form-input" />
+
+        <p class="status-message">
+          You will receive a confirmed e-mail shortly.
+        </p>
+        <p class="status-message">Your appointment detail has been saved.</p>
+
+        <a href="#" class="download-btn">Download receipt</a>
+
+        <!-- Payment illustration -->
+        <img
+          src="imagers/payment.png"
+          alt="Payment devices"
+          class="payment-illustration"
+        />
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>© 2024 Ushan Motors. All Rights Reserved</footer>
+  </body>
+</html>
