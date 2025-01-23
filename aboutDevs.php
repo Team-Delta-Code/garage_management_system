@@ -98,12 +98,6 @@ include('main/sessionChecker.php');
             color: #f57c00;
         }
 
-        @media (max-width: 768px) {
-            .metrics-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         .add-button {
             background: #E3F2FD;
             border: none;
@@ -117,6 +111,55 @@ include('main/sessionChecker.php');
             align-items: center;
             justify-content: center;
         }
+
+        .dev-grid {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+
+        .dev-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .dev-card h1 {
+            align-self: center;
+            font-size: 48px;
+            align-items: center;
+            text-align: center;
+            text-decoration: underline wavy tomato;
+        }
+
+        .dev-card p {
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .dev-grid img {
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dev-card {
+                flex-direction: column;
+            }
+
+            .dev-grid img {
+                width: 300px;
+            }
+        }
+
     </style>
 
 </head>
@@ -188,7 +231,17 @@ include('main/sessionChecker.php');
         </div>
 
         <div class="dashboard-grid">
-            
+            <div class="dev-grid">
+                <div class="dev-card">
+                    <h1>TEAM</h1>
+                    <h1>Delta</h1>
+                    <h1>Code</h1>
+                </div><br>
+                <div class="dev-card">
+                    <p>At Team Delta-Code, we are a passionate group of independent software developers united by our commitment to creating innovative and reliable solutions. Our team combines diverse technical expertise with creative problem-solving approaches to deliver exceptional software products. We believe in writing clean, maintainable code and embracing modern development practices to build systems that make a difference. With a collaborative spirit and dedication to excellence, we transform complex challenges into elegant solutions that drive real-world impact.</p>
+                </div>
+                <img src="images/team.png">
+            </div>
         </div>
 
     </main>

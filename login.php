@@ -49,6 +49,7 @@ if(isset($_SESSION['employee_id'])) {
             //     echo "Username doesn't exist";
             // }
 
+            //session creation for the current user
             if($result->num_rows == 1) {
                 $value = $result->fetch_assoc();
                 $_SESSION['employee_id'] = $value['employee_id'];

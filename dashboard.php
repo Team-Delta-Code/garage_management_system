@@ -1,5 +1,34 @@
 <?php
 include('main/sessionChecker.php');
+
+//count sales for the current month
+$stmt = $connect->prepare("SELECT COUNT(*) as sales_count FROM transactions WHERE MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
+$stmt->execute();
+$stmt->bind_result($sales_count);
+$stmt->fetch();
+$stmt->close();
+
+//count vehicle to be repaired in the current month
+$stmt = $connect->prepare("SELECT COUNT(*) as to_repair_count FROM service_order WHERE service_order_status = 0;");
+$stmt->execute();
+$stmt->bind_result($to_repair_count);
+$stmt->fetch();
+$stmt->close();
+
+//count reminders
+$stmt = $connect->prepare("SELECT COUNT(*) as reminder_count FROM reminders");
+$stmt->execute();
+$stmt->bind_result($reminder_count);
+$stmt->fetch();
+$stmt->close();
+
+//count mechanics
+$stmt = $connect->prepare("SELECT COUNT(*) as mechanic_count FROM employees WHERE role_id!='role_admin' AND role_id!='role_mgr' AND role_id!='role_recep';");
+$stmt->execute();
+$stmt->bind_result($mech_count);
+$stmt->fetch();
+$stmt->close();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -84,7 +113,7 @@ include('main/sessionChecker.php');
             	<div class="dashboard-card">
 	                <div class="card-content">
 	                    <div class="card-title">Monthly Sales</div>
-	                    <div class="card-value">50</div>
+	                    <div class="card-value"><?php echo $sales_count ?></div>
 	                </div>
 	                <div class="card-icon">👤</div>
 	            </div>
@@ -94,7 +123,7 @@ include('main/sessionChecker.php');
             	<div class="dashboard-card">
 	                <div class="card-content">
 	                    <div class="card-title">Vehicle to Repair</div>
-	                    <div class="card-value">12</div>
+	                    <div class="card-value"><?php echo $to_repair_count ?></div>
 	                </div>
 	                <div class="card-icon">🚗</div>
 	            </div>
@@ -104,7 +133,7 @@ include('main/sessionChecker.php');
             	<div class="dashboard-card">
 	                <div class="card-content">
 	                    <div class="card-title">Reminders</div>
-	                    <div class="card-value" id="reminderCount">3</div>
+	                    <div class="card-value" id="reminderCount"><?php echo $reminder_count ?></div>
 	                </div>
 	                <div class="card-icon">💬</div>
 	            </div>
@@ -114,10 +143,19 @@ include('main/sessionChecker.php');
             	<div class="dashboard-card">
 	                <div class="card-content">
 	                    <div class="card-title">Mechanics</div>
-	                    <div class="card-value">05</div>
+	                    <div class="card-value"><?php echo $mech_count ?></div>
 	                </div>
 	                <div class="card-icon">👥</div>
 	            </div>
+            </a>
+
+            <a href="newEntry.php">
+                <div class="dashboard-card">
+                    <div class="card-content">
+                        <div class="card-title">Add New Entry</div>
+                    </div>
+                    <div class="card-icon">➕</div>
+                </div>
             </a>
 
         </div>

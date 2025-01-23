@@ -11,5 +11,4 @@ if (!isset($_SESSION['employee_id'])) {
 
 //database connection
 include('main/connect.php');
-
 ?>
