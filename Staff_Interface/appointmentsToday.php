@@ -8,7 +8,7 @@ include('main/sessionChecker.php');
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta name="author" content="Team Delta Code">
-	<title>Appointments Today | Ushan Motors</title>
+	<title>Today Appointments | Ushan Motors</title>
 	<link rel="stylesheet" type="text/css" href="styles/mainStyle.css">
 
     <style type="text/css">
@@ -117,6 +117,31 @@ include('main/sessionChecker.php');
             align-items: center;
             justify-content: center;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color:rgba(242, 242, 242, 0.96);
+        }
+
+        .appointment-header {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: black;
+        }
+
     </style>
 
 </head>
@@ -142,7 +167,7 @@ include('main/sessionChecker.php');
                 	<span class="menu-text">Vehicle to Repair</span>
                 </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
                 <a href="reminders.php">
                 	<span class="icon">⏰</span>
         	        <span class="menu-text">Reminders</span>
@@ -154,7 +179,7 @@ include('main/sessionChecker.php');
                 	<span class="menu-text">Mechanics</span>
                 </a>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
                 <a href="appointments.php">
                 	<span class="icon">📅</span>
                 	<span class="menu-text">Appointment</span>
@@ -172,7 +197,7 @@ include('main/sessionChecker.php');
     <main class="main-content">
         <div class="top-bar">
             <div class="breadcrumb">
-                ⏲️<a href="dashboard.php">Home</a> > <a href="reminders.php">Appointments</a> > <a href="#">Appointments Today</a>
+                ⏲️<a href="dashboard.php">Home</a> > <a href="#">PathName</a>
             </div>
             <div>
                 <a href="#" class="user-profile" onclick="toggleDropdown(event)">
@@ -180,17 +205,58 @@ include('main/sessionChecker.php');
                     <div class="user-name">Shank Fury</div>
                 </a>
                 <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#">Profile</a>
-                    <a href="#">Settings</a>
+                    <a href="settings.php">Settings</a>
                     <a href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
 
-        <div class="dashboard-grid">
-            
-        </div>
+        
 
+            <div class="dashboard-grid">
+                <div class="appointment-header">
+                    <h1>Today's Appointments</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Vehicle Number</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Viranga Nimnada</td>
+                                <td>CK 1234</td>
+                                <td>10:00 AM</td>
+                            </tr>
+                            <tr>
+                                <td>Janith Sachintha</td>
+                                <td>XYZ 5678</td>
+                                <td>11:30 AM</td>
+                            </tr>
+                            <tr>
+                                <td>Udara </td>
+                                <td>LMN 9012</td>
+                                <td>1:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Avishka Nipun</td>
+                                <td>PQR 3456</td>
+                                <td>2:30 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Tifin Vimarshana</td>
+                                <td>JKL 7890</td>
+                                <td>4:00 PM</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+
+            
     </main>
     <script type="text/javascript" src="js/mainScript.js"></script>
 </body>

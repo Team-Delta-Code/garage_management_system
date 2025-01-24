@@ -223,8 +223,7 @@ include('main/sessionChecker.php');
                     <div class="user-name">Shank Fury</div>
                 </a>
                 <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#">Profile</a>
-                    <a href="#">Settings</a>
+                    <a href="settings.php">Settings</a>
                     <a href="logout.php">Logout</a>
                 </div>
             </div>

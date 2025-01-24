@@ -72,8 +72,7 @@ include('main/sessionChecker.php');
 			        <div class="user-name">Shank Fury</div>
 			    </a>
 			    <div class="dropdown-menu" id="dropdownMenu">
-			        <a href="#">Profile</a>
-			        <a href="#">Settings</a>
+                    <a href="settings.php">Settings</a>
 			        <a href="logout.php">Logout</a>
 			    </div>
             </div>
@@ -90,33 +89,13 @@ include('main/sessionChecker.php');
                 </div>
             </a>
 
-            <a href="repairPendingReview.php">
+            <a href="repairCompleted.php">
                 <div class="dashboard-card">
                     <div class="card-content">
-                        <div class="card-title">Pending Review</div>
-                        <div class="card-value">3</div>
-                    </div>
-                    <div class="card-icon">📋</div>
-                </div>
-            </a>
-
-            <a href="repairCompletedToday.php">
-                <div class="dashboard-card">
-                    <div class="card-content">
-                        <div class="card-title">Completed Today</div>
+                        <div class="card-title">Repair Completed</div>
                         <div class="card-value">5</div>
                     </div>
                     <div class="card-icon">✅</div>
-                </div>
-            </a>
-
-            <a href="repairPartsNeeded.php">
-                <div class="dashboard-card">
-                    <div class="card-content">
-                        <div class="card-title">Parts Needed</div>
-                        <div class="card-value">12</div>
-                    </div>
-                    <div class="card-icon">⚙️</div>
                 </div>
             </a>
         </div>

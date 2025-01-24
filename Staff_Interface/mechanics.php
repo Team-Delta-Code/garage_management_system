@@ -72,8 +72,7 @@ include('main/sessionChecker.php');
                     <div class="user-name">Shank Fury</div>
                 </a>
                 <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#">Profile</a>
-                    <a href="#">Settings</a>
+                    <a href="settings.php">Settings</a>
                     <a href="logout.php">Logout</a>
                 </div>
             </div>
@@ -109,16 +108,7 @@ include('main/sessionChecker.php');
                     <div class="card-icon">🏖️</div>
                 </div>
             </a>
-
-            <a href="mechanicsActiveJobs.php">
-                <div class="dashboard-card">
-                    <div class="card-content">
-                        <div class="card-title">Active Jobs</div>
-                        <div class="card-value">4</div>
-                    </div>
-                    <div class="card-icon">🔧</div>
-                </div>
-            </a>
+            
         </div>
     </main>
 

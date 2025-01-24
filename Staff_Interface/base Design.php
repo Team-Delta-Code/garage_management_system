@@ -1,5 +1,5 @@
 <?php
-include('main/sessionChecker.php');
+// include('main/sessionChecker.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,7 +8,7 @@ include('main/sessionChecker.php');
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta name="author" content="Team Delta Code">
-	<title>Reminders Service Due | Ushan Motors</title>
+	<title>Base Design | Ushan Motors</title>
 	<link rel="stylesheet" type="text/css" href="styles/mainStyle.css">
 
     <style type="text/css">
@@ -117,6 +117,8 @@ include('main/sessionChecker.php');
             align-items: center;
             justify-content: center;
         }
+
+
     </style>
 
 </head>
@@ -172,7 +174,7 @@ include('main/sessionChecker.php');
     <main class="main-content">
         <div class="top-bar">
             <div class="breadcrumb">
-                ⏲️<a href="dashboard.php">Home</a> > <a href="reminders.php">Reminders</a> > <a href="#">Reminders Service Due</a>
+                ⏲️<a href="dashboard.php">Home</a> > <a href="#">PathName</a>
             </div>
             <div>
                 <a href="#" class="user-profile" onclick="toggleDropdown(event)">
@@ -180,15 +182,15 @@ include('main/sessionChecker.php');
                     <div class="user-name">Shank Fury</div>
                 </a>
                 <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#">Profile</a>
-                    <a href="#">Settings</a>
+                    <a href="profile.php">Profile</a>
+                    <a href="settings.php">Settings</a>
                     <a href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
 
         <div class="dashboard-grid">
-            
+            <!-- Code your content here -->
         </div>
 
     </main>

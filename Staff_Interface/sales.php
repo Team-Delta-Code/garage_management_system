@@ -102,15 +102,14 @@ $stmt->close();
 			        <div class="user-name">Shank Fury</div>
 			    </a>
 			    <div class="dropdown-menu" id="dropdownMenu">
-			        <a href="#">Profile</a>
-			        <a href="#">Settings</a>
+                    <a href="settings.php">Settings</a>
 			        <a href="logout.php">Logout</a>
 			    </div>
             </div>
     	</div>
 
         <div class="dashboard-grid">
-            <a href="todaySales.php">
+            <a href="salesToday.php">
                 <div class="dashboard-card">
                     <div class="card-content">
                         <div class="card-title">Today's Sales</div>

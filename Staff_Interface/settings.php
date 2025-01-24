@@ -8,7 +8,7 @@ include('main/sessionChecker.php');
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta name="author" content="Team Delta Code">
-	<title>Reminders Warranty Expiring | Ushan Motors</title>
+	<title>Settings | Ushan Motors</title>
 	<link rel="stylesheet" type="text/css" href="styles/mainStyle.css">
 
     <style type="text/css">
@@ -117,6 +117,59 @@ include('main/sessionChecker.php');
             align-items: center;
             justify-content: center;
         }
+
+        .container {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-div {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            margin: 8px auto;
+            font-size: 20px;
+
+        }
+
+        .header-div .header {
+            font-weight: 700;
+        }
+
+        .header-div form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            font-size: 16px;
+            color: #6b7480;
+        }
+
+        form input[type=password] {
+            height: 36px;
+            border: none;
+            background-color: #b1c8e6;
+            border-radius: 20px;
+        }
+
+        form input[type=submit] {
+            height: 36px;
+            border: none;
+            background-color: #1a237e;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 15px;
+        }
+
     </style>
 
 </head>
@@ -161,7 +214,7 @@ include('main/sessionChecker.php');
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#">
+                <a href="aboutDevs.php">
                     <span class="icon">💻</span>
                     <span class="menu-text">About Devs</span>
                 </a>
@@ -172,7 +225,7 @@ include('main/sessionChecker.php');
     <main class="main-content">
         <div class="top-bar">
             <div class="breadcrumb">
-                ⏲️<a href="dashboard.php">Home</a> > <a href="reminders.php">Reminders</a> > <a href="#">Reminders Warranty Expiring</a>
+                ⏲️<a href="dashboard.php">Home</a> > <a href="#">Settings</a>
             </div>
             <div>
                 <a href="#" class="user-profile" onclick="toggleDropdown(event)">
@@ -180,15 +233,30 @@ include('main/sessionChecker.php');
                     <div class="user-name">Shank Fury</div>
                 </a>
                 <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#">Profile</a>
-                    <a href="#">Settings</a>
+                    <a href="settings.php">Settings</a>
                     <a href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
 
         <div class="dashboard-grid">
-            
+            <div class="container">
+                <div class="header-div">
+                    <h1>Shank Fury</h1>
+                </div>
+                <div class="header-div">
+                    <span class="header">Position: </span><span>System Administrator</span>
+                </div>
+                <div class="header-div">
+                    <span class="header">Change Password</span><br>
+                    <form>
+                        <label>Old Password </label><input type="password" name="oldPsw"><br>
+                        <label>New Password </label><input type="password" name="newPsw"><br>
+                        <label>Confirm New Password </label><input type="password" name="confirmPsw"><br>
+                        <input type="submit" name="Change">
+                    </form>
+                </div>
+            </div>
         </div>
 
     </main>

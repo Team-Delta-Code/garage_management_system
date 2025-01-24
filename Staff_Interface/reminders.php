@@ -72,51 +72,30 @@ include('main/sessionChecker.php');
 			        <div class="user-name">Shank Fury</div>
 			    </a>
 			    <div class="dropdown-menu" id="dropdownMenu">
-			        <a href="#">Profile</a>
-			        <a href="#">Settings</a>
+                    <a href="settings.php">Settings</a>
 			        <a href="logout.php">Logout</a>
 			    </div>
             </div>
     	</div>
 
         <div class="dashboard-grid">
-            <a href="reminderTodayFollowUps.php">
+            <a href="reminderFollowUps.php">
                 <div class="dashboard-card">
                     <div class="card-content">
-                        <div class="card-title">Today's Follow-ups</div>
+                        <div class="card-title">Follow-ups</div>
                         <div class="card-value">6</div>
                     </div>
                     <div class="card-icon">📞</div>
                 </div>
             </a>
 
-            <a href="remindersServiceDue.php">
+            <a href="remindersDue.php">
                 <div class="dashboard-card">
                     <div class="card-content">
                         <div class="card-title">Service Due</div>
                         <div class="card-value">8</div>
                     </div>
                     <div class="card-icon">🔔</div>
-                </div>
-            </a>
-
-            <a href="remindersPartOrders.php">
-                <div class="dashboard-card">
-                    <div class="card-content">
-                        <div class="card-title">Part Orders</div>
-                        <div class="card-value">4</div>
-                    </div>
-                    <div class="card-icon">📦</div>
-                </div>
-            </a>
-
-            <a href="remindersWarrantyExpiring.php">
-                <div class="dashboard-card">
-                    <div class="card-content">
-                        <div class="card-title">Warranty Expiring</div>
-                        <div class="card-value">3</div>
-                    </div>
-                    <div class="card-icon">⚠️</div>
                 </div>
             </a>
         </div>
