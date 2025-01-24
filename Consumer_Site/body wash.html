@@ -19,18 +19,10 @@
       }
 
       /*style for header*/
-      /* Reset default styles and set up base styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-      }
-
       /* Main navigation styles */
       .nav-container {
         background-color: #1a237e; /* Deep blue color for nav */
-        padding: 15px 5%;
+        padding: 10px 5%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -60,6 +52,7 @@
         position: absolute; /* Positioning */
         top: 10px; /* Adjusted position */
         left: 10px; /* Adjusted position */
+        margin-bottom: 10px;
       }
 
       .year-badge img {
@@ -145,6 +138,7 @@
         padding: 2rem;
         border-radius: 10px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
       }
 
       .appointment-section h2 {
@@ -156,7 +150,7 @@
         display: block;
         width: 100%;
         padding: 1rem;
-        background-color: #7c4dff;
+        background-color: #964b00;
         color: white;
         border: none;
         border-radius: 25px;
@@ -164,10 +158,11 @@
         cursor: pointer;
         transition: background-color 0.3s;
         margin-bottom: 10px;
+        text-decoration: none;
       }
 
       .book-button:hover {
-        background-color: #651fff;
+        background-color: #3c2105ae;
       }
 
       /* Footer styles */
@@ -192,31 +187,25 @@
     </style>
   </head>
   <body>
-    <!-- Navigation bar -->
+    <!-- Header with navigation -->
     <nav class="nav-container">
       <div class="logo-section">
-        <!-- 25 Years badge -->
         <div class="year-badge">
           <img src="imagers/25 years.png" alt="logo" />
         </div>
-        <!-- Company name -->
         <div class="company-name">Ushan Motors</div>
       </div>
-      <!-- Navigation menu -->
       <div class="nav-menu">
-        <a href="Home page.html">Home</a>
+        <a href="index page.html">Home</a>
         <a href="service page.html">Service</a>
         <a href="about page.html">About</a>
         <a href="contact page.html">Contact</a>
       </div>
     </nav>
 
-    <!-- Breadcrumb navigation -->
-    <div class="breadcrumb">Body Wash</div>
+    <div class="breadcrumb">Paint Services</div>
 
-    <!-- Main content area -->
     <div class="main-content">
-      <!-- Services list section -->
       <section class="services-section">
         <h1>Body Wash</h1>
         <div class="service-list">
@@ -230,10 +219,12 @@
         </div>
       </section>
 
-      <!-- Appointment booking section -->
       <section class="appointment-section">
         <h2>Book Your Appointment Today!</h2>
-        <button class="book-button">Place Appointment</button>
+        <a href="Body wash appoinment booking.html">
+          <button class="book-button">Place Appointment</button>
+        </a>
+
         <img
           class="appoinment"
           src="imagers/appoinment book.jpg"
@@ -244,7 +235,6 @@
       </section>
     </div>
 
-    <!-- Footer -->
     <footer>© 2024 Ushan Motors. All Rights Reserved</footer>
   </body>
 </html>

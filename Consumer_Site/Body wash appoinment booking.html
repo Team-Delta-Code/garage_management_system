@@ -13,25 +13,16 @@
 
       body {
         font-family: Arial, sans-serif;
-        background-color: #c5cae9;
-      }
-      /*style for header*/
-      /* Reset default styles and set up base styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
+        background-color: #a5b4fc;
       }
 
       /* Main navigation styles */
       .nav-container {
-        background-color: #1a237e; /* Deep blue color for nav */
+        background-color: #1a237e;
         padding: 15px 5%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: fixed; /* Keep nav fixed at top */
         width: 100%;
         z-index: 1000; /* Ensure nav stays on top */
       }
@@ -57,6 +48,7 @@
         position: absolute; /* Positioning */
         top: 10px; /* Adjusted position */
         left: 10px; /* Adjusted position */
+        margin-bottom: 10px;
       }
 
       .year-badge img {
@@ -84,18 +76,21 @@
       }
 
       .main-content {
-        padding: 8rem 5%;
+        padding: 6rem 5%;
       }
 
       .booking-container {
         max-width: 1200px;
         margin: 2rem auto;
-        padding: 2rem;
+        padding: 4rem;
+        align-items: center;
       }
 
       .booking-title {
-        font-size: 2.5rem;
+        font-size: 3rem;
         margin-bottom: 2rem;
+        align-items: center;
+        color: #ffffff;
       }
 
       .form-group {
@@ -107,6 +102,7 @@
       .form-label {
         width: 200px;
         font-size: 1.2rem;
+        margin: top 50px;
       }
 
       .form-input {
@@ -114,14 +110,6 @@
         width: 300px;
         font-size: 1rem;
         border: 1px solid #ccc;
-      }
-
-      select.form-input {
-        appearance: none;
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-        background-repeat: no-repeat;
-        background-position: right 0.5rem center;
-        background-size: 1em;
       }
 
       .booking-notice {
@@ -146,13 +134,37 @@
       .btn-confirm {
         background-color: #1a237e;
         color: white;
+        text-decoration: none; /* Removes the underline */
+        color: white; /* Matches the text color of its parent element */
       }
 
       .btn-cancel {
         background-color: #ccc;
         color: black;
+        text-decoration: none; /* Removes the underline */
+        color: blacks;
       }
 
+      .btn-confirm:hover {
+        background-color: #0d47a1; /* Darker shade for hover */
+        transform: scale(1.05); /* Slightly increase size */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+      }
+
+      .btn-cancel:hover {
+        background-color: #bbb; /* Darker shade for hover */
+        transform: scale(1.05); /* Slightly increase size */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+      }
+
+      .btn-confirm:active {
+        background-color: #0b3d91; /* Even darker shade for active */
+      }
+
+      .btn-cancel:active {
+        background-color: #999; /* Even darker shade for active */
+      }
+      /* booking img */
       .booking-illustration {
         position: absolute;
         right: 2rem;
@@ -187,17 +199,13 @@
     </style>
   </head>
   <body>
-    <!-- Navigation bar -->
     <nav class="nav-container">
       <div class="logo-section">
-        <!-- 25 Years badge -->
         <div class="year-badge">
           <img src="imagers/25 years.png" alt="logo" />
         </div>
-        <!-- Company name -->
         <div class="company-name">Ushan Motors</div>
       </div>
-      <!-- Navigation menu -->
       <div class="nav-menu">
         <a href="index page.html">Home</a>
         <a href="service page.html">Service</a>
@@ -218,9 +226,13 @@
         <label class="form-label">Service</label>
         <select class="form-input">
           <option>--Select--</option>
-          <option>Full Service</option>
-          <option>Tow Service</option>
-          <option>Engine Maintenance</option>
+          <option>Basic exterior wash</option>
+          <option>Hand wish</option>
+          <option>Waxing and polishing</option>
+          <option>Under body wash</option>
+          <option>Pressure wash</option>
+          <option>Polishing</option>
+          <option>Engine Bay cleaning</option>
         </select>
       </div>
 
@@ -237,8 +249,12 @@
       </p>
 
       <div class="button-group">
-        <button class="btn btn-confirm">Confirm</button>
-        <button class="btn btn-cancel">Cancel</button>
+        <a href="payment-success.html"
+          ><button class="btn btn-confirm">Confirm</button></a
+        >
+        <a href="full service page.html"
+          ><button class="btn btn-cancel">Cancel</button></a
+        >
       </div>
     </main>
 
