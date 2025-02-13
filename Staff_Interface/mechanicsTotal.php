@@ -1,5 +1,27 @@
 <?php
 include('main/sessionChecker.php');
+
+$empId = "";
+$firstName = "";
+$lastName = "";
+$basicSal = "";
+
+//get all mechanics from the table
+$stmt = $connect->prepare("SELECT `employee_id`, `emp_first_name`, `emp_last_name`, `basic_salary` FROM employees WHERE role_id='role_mech';;");
+$stmt->execute();
+$stmt->bind_result($empId, $firstName, $lastName, $basicSal);
+// Initialize variables to hold the results
+$results = [];
+while ($stmt->fetch()) {
+    $results[] = [
+        'employee_id' => $empId,
+        'emp_first_name' => $firstName,
+        'emp_last_name' => $lastName,
+        'basic_salary' => $basicSal
+    ];
+}
+$stmt->close();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -305,38 +327,40 @@ include('main/sessionChecker.php');
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>Employee Id</th>
                             <th>Name</th>
-                            <th>Position</th>
+                            <th>Salary(LKR)</th>
                             
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>W.A.Nimal</td>
-                            <td>Owner</td>
+                        <?php
+                            // Check if there are no appointments
+                            if (empty($results)) {
+                                $empId = "";
+                                $firstName = "";
+                                $lastName = "";
+                                $basicSal = "";
+                            } else {
+                                // If there are results, access them
+                                foreach ($results as $result) {
+                                    $empId = $result['employee_id'];
+                                    $firstName = $result['emp_first_name'];
+                                    $lastName = $result['emp_last_name'];
+                                    $basicSal = $result['basic_salary'];
+                                    
+                                    // Process each result
+                                    echo "
+                                    <tr>
+                                        <td>".$empId."</td>
+                                        <td>".$firstName." ".$lastName."</td>
+                                        <td>".$basicSal."</td>
+                                    </tr>
+                                    ";
+                                }
+                            }
                             
-                        </tr>
-                        <tr>
-                            <td>C.P.Chathuranga</td>
-                            <td>Technician</td>
-                          
-                        </tr>
-                        <tr>
-                            <td>W.P.Wishwa</td>
-                            <td>Trainee Mechanic</td>
-                          
-                        </tr>
-                        <tr>
-                            <td>V.C.Chathuka</td>
-                            <td>Auto Electrician</td>
-                          
-                        </tr>
-                        <tr>
-                            <td>J.D.Bandara</td>
-                            <td>Technician</td>
-                          
-                        </tr>
-         
+                            ?>
                     </tbody>
                 </table>
             </div>

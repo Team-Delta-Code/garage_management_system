@@ -1,5 +1,25 @@
 <?php
 include('main/sessionChecker.php');
+
+$empId = "";
+$firstName = "";
+$lastName = "";
+
+//get all mechanics from the table
+$stmt = $connect->prepare("SELECT `employee_id`, `emp_first_name`, `emp_last_name` FROM employees a JOIN employee_attendance b ON a.`employee_id`=b.`emp_id` WHERE a.`role_id`='role_mech' AND DATE(time_stamp) = CURDATE() AND availability = 1;");
+$stmt->execute();
+$stmt->bind_result($empId, $firstName, $lastName);
+// Initialize variables to hold the results
+$results = [];
+while ($stmt->fetch()) {
+    $results[] = [
+        'employee_id' => $empId,
+        'emp_first_name' => $firstName,
+        'emp_last_name' => $lastName
+    ];
+}
+$stmt->close();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -294,42 +314,36 @@ include('main/sessionChecker.php');
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>Employee Id</th>
                             <th>Name</th>
-                            <th>Position</th>
-                            <th>Availability</th>
-                            
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>W.A.Nimal</td>
-                            <td>Owner</td>
-                            <td class="status-Available">Available</td>
+                            <?php
+                            // Check if there are no appointments
+                            if (empty($results)) {
+                                $empId = "";
+                                $firstName = "";
+                                $lastName = "";
+                            } else {
+                                // If there are results, access them
+                                foreach ($results as $result) {
+                                    $empId = $result['employee_id'];
+                                    $firstName = $result['emp_first_name'];
+                                    $lastName = $result['emp_last_name'];
+                                    
+                                    // Process each result
+                                    echo "
+                                    <tr>
+                                        <td>".$empId."</td>
+                                        <td>".$firstName." ".$lastName."</td>
+                                    </tr>
+                                    ";
+                                }
+                            }
                             
-                        </tr>
-                        <tr>
-                            <td>C.P.Chathuranga</td>
-                            <td>Technician</td>
-                            <td class="status-Unavailable">Unavailable</td>
-                          
-                        </tr>
-                        <tr>
-                            <td>W.P.Wishwa</td>
-                            <td>Trainee Mechanic</td>
-                            <td class="status-Available">Available</td>
-                          
-                        </tr>
-                        <tr>
-                            <td>V.C.Chathuka</td>
-                            <td>Auto Electrician</td>
-                            <td class="status-Unavailable">Unavailable</td>
-                          
-                        </tr>
-                        <tr>
-                            <td>J.D.Bandara</td>
-                            <td>Technician</td>
-                            <td class="status-Available">Available</td>
-                          
+                            ?>
                         </tr>
                     </tbody>
                 </table>

@@ -254,14 +254,14 @@ $stmt->close();
                                 $date = "";
                                 $time = "";
                             } else {
-                                // If there are results, you can access them like this:
+                                // If there are results, access them
                                 foreach ($results as $result) {
                                     $custName = $result['cust_name'];
                                     $srv = $result['service_name'];
                                     $date = $result['appointment_date'];
                                     $time = $result['appointment_time'];
                                     
-                                    // Process each result as needed
+                                    // Process each result
                                     echo "
                                     <tr>
                                         <td>".$custName."</td>

@@ -1,5 +1,25 @@
 <?php
 include('main/sessionChecker.php');
+
+$empId = "";
+$firstName = "";
+$lastName = "";
+
+//get all mechanics from the table
+$stmt = $connect->prepare("SELECT `employee_id`, `emp_first_name`, `emp_last_name` FROM employees a JOIN employee_attendance b ON a.`employee_id`=b.`emp_id` WHERE a.`role_id`='role_mech' AND DATE(time_stamp) = CURDATE() AND availability = 0;");
+$stmt->execute();
+$stmt->bind_result($empId, $firstName, $lastName);
+// Initialize variables to hold the results
+$results = [];
+while ($stmt->fetch()) {
+    $results[] = [
+        'employee_id' => $empId,
+        'emp_first_name' => $firstName,
+        'emp_last_name' => $lastName
+    ];
+}
+$stmt->close();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -216,46 +236,37 @@ include('main/sessionChecker.php');
                     <table>
                         <thead>
                             <tr>
-                                <th>Member Name</th>
-                                <th>Leave Start Date</th>
-                                <th>Leave End Date</th>
-                                <th>Reason</th>
+                                <th>Employee Id</th>
+                                <th>Name</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Amal Perera</td>
-                                <td>2025-01-25</td>
-                                <td>2025-01-27</td>
-                                <td>Personal Emergency</td>
-                            </tr>
-                           
-                            <tr>
-                                <td>Damith Kamal</td>
-                                <td>2025-01-27</td>
-                                <td>2025-01-30</td>
-                                <td>Vacation</td>
-                            </tr>
-                            <tr>
-                                <td>Emil  Davis</td>
-                                <td>2025-01-28</td>
-                                <td>2025-02-01</td>
-                                <td>Personal Reasons</td>
-                            </tr>
-                            <tr>
-                                <td>Janidu sithum</td>
-                                <td>2025-01-30</td>
-                                <td>2025-02-02</td>
-                                <td>Medical Procedure</td>
-                            </tr>
-                            <tr>
-                                <td>Arn Kavi</td>
-                                <td>2025-01-29</td>
-                                <td>2025-02-01</td>
-                                <td>Personal Leave</td>
-                            </tr>
+                                <?php
+                            // Check if there are no appointments
+                            if (empty($results)) {
+                                $empId = "";
+                                $firstName = "";
+                                $lastName = "";
+                            } else {
+                                // If there are results, access them
+                                foreach ($results as $result) {
+                                    $empId = $result['employee_id'];
+                                    $firstName = $result['emp_first_name'];
+                                    $lastName = $result['emp_last_name'];
+                                    
+                                    // Process each result
+                                    echo "
+                                    <tr>
+                                        <td>".$empId."</td>
+                                        <td>".$firstName." ".$lastName."</td>
+                                    </tr>
+                                    ";
+                                }
+                            }
                             
-                            
+                            ?>
+                            </tr>
                         </tbody>
                     </table>
                     
