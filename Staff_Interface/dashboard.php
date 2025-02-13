@@ -23,7 +23,7 @@ $stmt->fetch();
 $stmt->close();
 
 //count mechanics
-$stmt = $connect->prepare("SELECT COUNT(*) as mechanic_count FROM employees WHERE role_id!='role_admin' AND role_id!='role_mgr' AND role_id!='role_recep';");
+$stmt = $connect->prepare("SELECT COUNT(*) as mechanic_count FROM employees WHERE role_id='role_mech';");
 $stmt->execute();
 $stmt->bind_result($mech_count);
 $stmt->fetch();

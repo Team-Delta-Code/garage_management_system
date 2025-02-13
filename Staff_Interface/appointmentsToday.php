@@ -1,5 +1,30 @@
 <?php
 include('main/sessionChecker.php');
+
+$custName = "";
+$srv = "";
+$time = "";
+
+//reset appointments view
+$stmt = $connect->prepare("DELETE FROM appointments WHERE DATE(`time_stamp`) < DATE(CURRENT_DATE());");
+$stmt->execute();
+$stmt->close();
+
+//get appointments datafor today from the table
+$stmt = $connect->prepare("SELECT a.`cust_name`, b.`service_name`, TIME(a.`time_stamp`) AS appointment_time FROM appointments a JOIN garage_services b ON a.`service_id`=b.`service_id` WHERE DATE(a.`time_stamp`)=DATE(CURRENT_DATE());");
+$stmt->execute();
+$stmt->bind_result($custName, $srv, $time);
+// Initialize variables to hold the results
+$results = [];
+while ($stmt->fetch()) {
+    $results[] = [
+        'cust_name' => $custName,
+        'service_name' => $srv,
+        'appointment_time' => $time
+    ];
+}
+$stmt->close();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -167,7 +192,7 @@ include('main/sessionChecker.php');
                 	<span class="menu-text">Vehicle to Repair</span>
                 </a>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
                 <a href="reminders.php">
                 	<span class="icon">⏰</span>
         	        <span class="menu-text">Reminders</span>
@@ -179,7 +204,7 @@ include('main/sessionChecker.php');
                 	<span class="menu-text">Mechanics</span>
                 </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
                 <a href="appointments.php">
                 	<span class="icon">📅</span>
                 	<span class="menu-text">Appointment</span>
@@ -220,36 +245,36 @@ include('main/sessionChecker.php');
                         <thead>
                             <tr>
                                 <th>Customer Name</th>
-                                <th>Vehicle Number</th>
+                                <th>Service</th>
                                 <th>Time</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Viranga Nimnada</td>
-                                <td>CK 1234</td>
-                                <td>10:00 AM</td>
-                            </tr>
-                            <tr>
-                                <td>Janith Sachintha</td>
-                                <td>XYZ 5678</td>
-                                <td>11:30 AM</td>
-                            </tr>
-                            <tr>
-                                <td>Udara </td>
-                                <td>LMN 9012</td>
-                                <td>1:00 PM</td>
-                            </tr>
-                            <tr>
-                                <td>Avishka Nipun</td>
-                                <td>PQR 3456</td>
-                                <td>2:30 PM</td>
-                            </tr>
-                            <tr>
-                                <td>Tifin Vimarshana</td>
-                                <td>JKL 7890</td>
-                                <td>4:00 PM</td>
-                            </tr>
+                            <?php
+                            // Check if there are no appointments
+                            if (empty($results)) {
+                                $custName = "";
+                                $srv = "";
+                                $time = "";
+                            } else {
+                                // If there are results, you can access them like this:
+                                foreach ($results as $result) {
+                                    $custName = $result['cust_name'];
+                                    $srv = $result['service_name'];
+                                    $time = $result['appointment_time'];
+                                    
+                                    // Process each result as needed
+                                    echo "
+                                    <tr>
+                                        <td>".$custName."</td>
+                                        <td>".$srv."</td>
+                                        <td>".$time."</td>
+                                    </tr>
+                                    ";
+                                }
+                            }
+                            
+                            ?>
                         </tbody>
                     </table>
                 </div>

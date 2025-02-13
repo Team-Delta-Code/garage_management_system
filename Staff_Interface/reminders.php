@@ -1,5 +1,28 @@
 <?php
 include('main/sessionChecker.php');
+
+//count follow-ups
+$stmt = $connect->prepare("SELECT COUNT(reminder_id) AS followups FROM reminders WHERE reminder_date >= CURRENT_DATE;");
+$stmt->execute();
+$stmt->bind_result($followups);
+$stmt->fetch();
+$stmt->close();
+//if there are no sales today amount is set to 0
+if($followups == null OR $followups == ''){
+    $followups = 0;
+}
+
+//count service dues
+$stmt = $connect->prepare("SELECT COUNT(reminder_id) FROM reminders WHERE reminder_date < CURRENT_DATE;");
+$stmt->execute();
+$stmt->bind_result($dueServices);
+$stmt->fetch();
+$stmt->close();
+//if there are no sales today amount is set to 0
+if($dueServices == null OR $dueServices == ''){
+    $dueServices = 0;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,7 +106,7 @@ include('main/sessionChecker.php');
                 <div class="dashboard-card">
                     <div class="card-content">
                         <div class="card-title">Follow-ups</div>
-                        <div class="card-value">6</div>
+                        <div class="card-value"><?php echo $followups ?></div>
                     </div>
                     <div class="card-icon">📞</div>
                 </div>
@@ -93,7 +116,7 @@ include('main/sessionChecker.php');
                 <div class="dashboard-card">
                     <div class="card-content">
                         <div class="card-title">Service Due</div>
-                        <div class="card-value">8</div>
+                        <div class="card-value"><?php echo $dueServices ?></div>
                     </div>
                     <div class="card-icon">🔔</div>
                 </div>

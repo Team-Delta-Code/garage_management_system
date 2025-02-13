@@ -1,5 +1,32 @@
 <?php
 include('main/sessionChecker.php');
+
+$custName = "";
+$srv = "";
+$date = "";
+$time = "";
+
+//reset appointments view
+$stmt = $connect->prepare("DELETE FROM appointments WHERE DATE(`time_stamp`) < DATE(CURRENT_DATE());");
+$stmt->execute();
+$stmt->close();
+
+//get all appointments data from the table
+$stmt = $connect->prepare("SELECT a.`cust_name`, b.`service_name`, DATE(a.`time_stamp`) AS appointment_date, TIME(a.`time_stamp`) AS appointment_time FROM appointments a JOIN garage_services b ON a.`service_id`=b.`service_id`;");
+$stmt->execute();
+$stmt->bind_result($custName, $srv, $date, $time);
+// Initialize variables to hold the results
+$results = [];
+while ($stmt->fetch()) {
+    $results[] = [
+        'cust_name' => $custName,
+        'service_name' => $srv,
+        'appointment_date' => $date,
+        'appointment_time' => $time
+    ];
+}
+$stmt->close();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -228,60 +255,34 @@ include('main/sessionChecker.php');
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Viranga Nimnada</td>
-                            <td>CK 1234</td>
-                            <td>2025-01-25</td>
-                            <td>10:00 AM</td>
-                        </tr>
-                        <tr>
-                            <td>Janith Sachintha</td>
-                            <td>XYZ 5678</td>
-                            <td>2025-01-25</td>
-                            <td>11:30 AM</td>
-                        </tr>
-                        <tr>
-                            <td>Udara Perera</td>
-                            <td>LMN 9012</td>
-                            <td>2025-01-25</td>
-                            <td>1:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Avishka Nipun</td>
-                            <td>PQR 3456</td>
-                            <td>2025-01-25</td>
-                            <td>2:30 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Tifin Vimarshana</td>
-                            <td>JKL 7890</td>
-                            <td>2025-01-25</td>
-                            <td>4:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Kavinda Silva</td>
-                            <td>ABC 1234</td>
-                            <td>2025-01-26</td>
-                            <td>9:00 AM</td>
-                        </tr>
-                        <tr>
-                            <td>Rashmika Bandara</td>
-                            <td>DEF 5678</td>
-                            <td>2025-01-26</td>
-                            <td>10:30 AM</td>
-                        </tr>
-                        <tr>
-                            <td>Shanika Tharushi</td>
-                            <td>GHI 3456</td>
-                            <td>2025-01-26</td>
-                            <td>1:30 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Tharindu Mahesh</td>
-                            <td>JKL 9876</td>
-                            <td>2025-01-26</td>
-                            <td>3:00 PM</td>
-                        </tr>
+                        <?php
+                            // Check if there are no appointments
+                            if (empty($results)) {
+                                $custName = "";
+                                $srv = "";
+                                $date = "";
+                                $time = "";
+                            } else {
+                                // If there are results, you can access them like this:
+                                foreach ($results as $result) {
+                                    $custName = $result['cust_name'];
+                                    $srv = $result['service_name'];
+                                    $date = $result['appointment_date'];
+                                    $time = $result['appointment_time'];
+                                    
+                                    // Process each result as needed
+                                    echo "
+                                    <tr>
+                                        <td>".$custName."</td>
+                                        <td>".$srv."</td>
+                                        <td>".$date."</td>
+                                        <td>".$time."</td>
+                                    </tr>
+                                    ";
+                                }
+                            }
+                            
+                            ?>
                     </tbody>
                 </table>
             </div>

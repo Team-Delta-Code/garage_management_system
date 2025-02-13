@@ -1,5 +1,33 @@
 <?php
 include('main/sessionChecker.php');
+
+//reset appointments view
+$stmt = $connect->prepare("DELETE FROM appointments WHERE DATE(`time_stamp`) < DATE(CURRENT_DATE());");
+$stmt->execute();
+$stmt->close();
+
+//count today appointments
+$stmt = $connect->prepare("SELECT COUNT(*) as apptTotal FROM appointments WHERE DATE(`time_stamp`) = DATE(CURRENT_DATE());");
+$stmt->execute();
+$stmt->bind_result($apptTotal);
+$stmt->fetch();
+$stmt->close();
+//if there are no appointments, the amount is set to 0
+if($apptTotal == null OR $apptTotal == ''){
+    $apptTotal = 0;
+}
+
+//count all appointments
+$stmt = $connect->prepare("SELECT COUNT(*) as apptAll FROM appointments;");
+$stmt->execute();
+$stmt->bind_result($apptAll);
+$stmt->fetch();
+$stmt->close();
+//if there are no appointments, the amount is set to 0
+if($apptAll == null OR $apptAll == ''){
+    $apptAll = 0;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,7 +111,7 @@ include('main/sessionChecker.php');
                 <div class="dashboard-card">
                     <div class="card-content">
                         <div class="card-title">Today's Appointments</div>
-                        <div class="card-value">9</div>
+                        <div class="card-value"><?php echo $apptTotal ?></div>
                     </div>
                     <div class="card-icon">📅</div>
                 </div>
@@ -93,7 +121,7 @@ include('main/sessionChecker.php');
                 <div class="dashboard-card">
                     <div class="card-content">
                         <div class="card-title">All Appointments</div>
-                        <div class="card-value">4</div>
+                        <div class="card-value"><?php echo $apptAll ?></div>
                     </div>
                     <div class="card-icon">⏰</div>
                 </div>
