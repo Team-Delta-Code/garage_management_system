@@ -95,16 +95,7 @@ $stmt->close();
             <div class="breadcrumb">
                 ⏲️<a href="#">Home</a> > <a href="#">Dashboard</a>
             </div>
-            <div>
-                <a href="#" class="user-profile" onclick="toggleDropdown(event)">
-                    <div class="user-avatar">SF</div>
-                    <div class="user-name">Shank Fury</div>
-                </a>
-                <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="settings.php">Settings</a>
-                    <a href="logout.php">Logout</a>
-                </div>
-            </div>
+            <?php include('profile_icon.php') ?>
         </div>
 
         <div class="dashboard-grid">
