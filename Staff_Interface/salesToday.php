@@ -70,6 +70,14 @@ include('main/sessionChecker.php');
             color: green;
         }
 
+        .status.pending {
+            color: blue;
+        }
+
+        .status.error {
+            color: red;
+        }
+
         .add-record {
             margin-top: 50px;
             text-align: center;
@@ -156,15 +164,72 @@ include('main/sessionChecker.php');
                 <div class="cards">
                     <div class="card">
                         <h3>Today's Sales</h3>
-                        <p>2,450 LKR</p>
+                        <p>
+                            <?php
+                            //get today sales money count from the table
+                            $stmt1 = $connect->prepare("SELECT SUM(amount) as todaySales FROM transactions WHERE DAY(time_stamp) = DAY(CURRENT_DATE()) AND MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
+                            $stmt1->execute();
+                            $stmt1->bind_result($todaySales);
+                            $stmt1->fetch();
+                            $stmt1->close();
+
+                            //if empty assigns 0
+                            if(empty($todaySales)){
+                                $todaySales = 0;
+                            }
+
+                            //print to page
+                            echo $todaySales." LKR";
+                            ?>  
+                        </p>
                     </div>
                     <div class="card">
                         <h3>Transactions</h3>
-                        <p>28</p>
+                        <p>
+                            <?php
+                            //get today transaction count from the table
+                            $stmt3 = $connect->prepare("SELECT COUNT(id) as todayTrans FROM transactions WHERE DAY(time_stamp) = DAY(CURRENT_DATE()) AND MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
+                            $stmt3->execute();
+                            $stmt3->bind_result($todayTrans);
+                            $stmt3->fetch();
+                            $stmt3->close();
+
+                            //if empty assigns 0
+                            if(empty($todayTrans)){
+                                $todayTrans = 0;
+                            }
+
+                            //print to page
+                            echo $todayTrans;
+                            ?>
+                        </p>
                     </div>
                     <div class="card">
                         <h3>Average Sale</h3>
-                        <p>444.64 LKR</p>
+                        <p>
+                            <?php
+                            //get sales count for the whole month from the table
+                            $stmt3 = $connect->prepare("SELECT COUNT(amount) as totalSales FROM transactions WHERE MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
+                            $stmt3->execute();
+                            $stmt3->bind_result($totalSales);
+                            $stmt3->fetch();
+                            $stmt3->close();
+                            //if empty assigns 0
+                            if(empty($totalSales)){
+                                $totalSales = 0;
+                            }
+                            //get current timestamp
+                            $timestamp = time();
+                            //extract day
+                            $days = date('d', $timestamp);
+
+                            //calculate average sales for the month as a percentage
+                            $avgSales = ($totalSales/$days)/100;
+
+                            //print to page
+                            echo $avgSales." %";
+                            ?>
+                        </p>
                     </div>
                 </div>
 
@@ -179,25 +244,66 @@ include('main/sessionChecker.php');
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                            //get all sales records data for today from the table
+                            $stmt4 = $connect->prepare("SELECT TIME(c.`time_stamp`) AS time0, a.`service_name`, e.`customer_name`, c.`amount`, b.`service_order_status` FROM garage_services a JOIN service_order b ON a.`service_id`=b.`service_id` JOIN transactions c ON b.`service_order_id`=c.`service_order_id` JOIN vehicle_data d ON b.`vehicle_id`=d.`vehicle_id` JOIN customer_data e ON d.`customer_id`=e.`customer_id`;");
+                            $stmt4->execute();
+                            $stmt4->bind_result($time0, $service, $customer, $amount, $status);
+                            // Initialize variables to hold the results
+                            $results = [];
+                            while ($stmt4->fetch()) {
+                                $results[] = [
+                                    'time0' => $time0,
+                                    'service_name' => $service,
+                                    'customer_name' => $customer,
+                                    'amount' => $amount,
+                                    'service_order_status' => $status
+                                ];
+                            }
+                            $stmt4->close();
+                            
+                            // Check if there are no results
+                            if (empty($results)) {
+                                $time0;
+                                $service = "";
+                                $customer = "";
+                                $amount = "";
+                                $status = "";
+                            } else {
+                                // If there are results, access them
+                                foreach ($results as $result) {
+                                    $time0 = $result['time0'];
+                                    $service = $result['service_name'];
+                                    $customer = $result['customer_name'];
+                                    $amount = $result['amount'];
+                                    $status = $result['service_order_status'];
+
+                                    if($status==1){
+                                        $statusMsg = "<td class='status completed'>Completed</td>";
+                                    } else if($status==0){
+                                        $statusMsg = "<td class='status pending'>Pending</td>";
+                                    } else {
+                                        $statusMsg = "<td class='status error'>Error Occurred</td>";
+                                    }
+                                    
+                                    // Process each result
+                                    echo "
+                                    <tr>
+                                        <td>".$time0."</td>
+                                        <td>".$service."</td>
+                                        <td>".$customer."</td>
+                                        <td>".$amount."</td>
+                                        ".$statusMsg."
+                                    </tr>
+                                    ";
+                                }
+                            }
+                            ?>
                         <tr>
                             <td>14:30</td>
                             <td>Oil Change</td>
                             <td>Alvis</td>
                             <td>1,500 LKR</td>
-                            <td class="status completed">Completed</td>
-                        </tr>
-                        <tr>
-                            <td>13:15</td>
-                            <td>Engine Tune Up</td>
-                            <td>Mdushanka</td>
-                            <td>8,000 LKR</td>
-                            <td class="status pending">Pending</td>
-                        </tr>
-                        <tr>
-                            <td>11:45</td>
-                            <td>Tire Replacement</td>
-                            <td>Tifin</td>
-                            <td>1,000 LKR</td>
                             <td class="status completed">Completed</td>
                         </tr>
                     </tbody>

@@ -12,8 +12,8 @@ if($inProgress == null OR $inProgress == ''){
     $inProgress = 0;
 }
 
-//count repair in progress
-$stmt1 = $connect->prepare("SELECT COUNT(*) AS completed FROM service_order WHERE `service_order_status` = 1 AND MONTH(`completed_date`)=MONTH(CURRENT_DATE() AND YEAR(`completed_date`)=YEAR(CURRENT_DATE()));");
+//count repair completed
+$stmt1 = $connect->prepare("SELECT COUNT(*) AS completed FROM service_order WHERE `service_order_status` = 1 AND MONTH(`completed_date`) = MONTH(CURRENT_DATE()) AND YEAR(`completed_date`) = YEAR(CURRENT_DATE());");
 $stmt1->execute();
 $stmt1->bind_result($completed);
 $stmt1->fetch();

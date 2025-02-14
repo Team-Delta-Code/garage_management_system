@@ -305,48 +305,54 @@ include('main/sessionChecker.php');
                             <th>Owner Name</th>
                             <th>Vehicle Number</th>
                             <th>Phone Number</th>
-                            <th>Due Date</th>
+                            <th>Recieved Date</th>
                             
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>W.A.Namal</td>
-                            <td>AB-4569</td>
-                            <td>0713451789</td>
-                            <td>2025/02/08</td>
+                        <?php
+                        //get all reminders data from the table0
+                            $stmt1 = $connect->prepare("SELECT b.`customer_name`, c.`license_plate_no`, b.`customer_contact`, a.`created_date` FROM service_order a JOIN vehicle_data c ON a.`vehicle_id`=c.`vehicle_id` JOIN customer_data b ON c.`customer_id`=b.`customer_id` WHERE `service_order_status` = 0;");
+                            $stmt1->execute();
+                            $stmt1->bind_result($custName, $lcnsPlateNo, $contact, $receDate);
+                            // Initialize variables to hold the results
+                            $results = [];
+                            while ($stmt1->fetch()) {
+                                $results[] = [
+                                    'emp_first_name' => $custName,
+                                    'emp_last_name' => $lcnsPlateNo,
+                                    'reminder_subject' => $contact,
+                                    'reminder_msg' => $receDate,
+                                ];
+                            }
+                            $stmt1->close();
                             
-                            
-                        </tr>
-                        <tr>
-                            <td>C.P.Chathuranga</td>
-                            <td>TAB-4567</td>
-                            <td>0754347562</td>
-                            <td>2025/03/08</td>
-                          
-                        </tr>
-                        <tr>
-                            <td>W.P.Wishwa</td>
-                            <td>NNB-8578</td>
-                            <td>0708962345</td>
-                            <td>2025/02/07</td>
-                          
-                        </tr>
-                        <tr>
-                            <td>V.C.Chathuka</td>
-                            <td>YT-0967</td>
-                            <td>0727858123</td>
-                            <td>2025/02/10</td>
-                          
-                        </tr>
-                        <tr>
-                            <td>J.D.Bandara</td>
-                            <td>FGH-4569</td>
-                            <td>0740012890</td>
-                            <td>2025/02/09</td>
-                          
-                        </tr>
-         
+                            // Check if there are no results
+                            if (empty($results)) {
+                                $custName = "";
+                                $lcnsPlateNo = "";
+                                $contact = "";
+                                $receDate = "";
+                            } else {
+                                // If there are results, access them
+                                foreach ($results as $result) {
+                                    $custName = $result['emp_first_name'];
+                                    $lcnsPlateNo = $result['emp_last_name'];
+                                    $contact = $result['reminder_subject'];
+                                    $receDate = $result['reminder_msg'];
+                                    
+                                    // Process each result
+                                    echo "
+                                    <tr>
+                                        <td>".$custName."</td>
+                                        <td>".$lcnsPlateNo."</td>
+                                        <td>".$contact."</td>
+                                        <td>".$receDate."</td>
+                                    </tr>
+                                    ";
+                                }
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>

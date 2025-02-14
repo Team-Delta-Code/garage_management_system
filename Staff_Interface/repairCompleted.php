@@ -38,6 +38,10 @@ include('main/sessionChecker.php');
             background-color:rgb(244, 244, 244);
         }
 
+        .main-header h2 {
+            text-align: center;
+        }
+
     </style>
 
 
@@ -108,37 +112,57 @@ include('main/sessionChecker.php');
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Vehicle Number</th>
                                 <th>Owner Name</th>
-                                <th>Contact Number</th>
-                                <th>Amount</th>
+                                <th>Vehicle Number</th>
+                                <th>Phone Number</th>
+                                <th>Recieved Date</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>ABC-456</td>
-                                <td>Nipun Sanjeewa</td>
-                                <td>0711234567</td>
-                                <td>4,500 LKR</td>
-                            </tr>
-                            <tr>
-                                <td>QQ-8243</td>
-                                <td>Janith Lanarol</td>
-                                <td>0789876543</td>
-                                <td>8,000 LKR</td>
-                            </tr>
-                            <tr>
-                                <td>BBl-3486</td>
-                                <td>Janaka Bandara </td>
-                                <td>0119876567</td>
-                                <td>2950 LKR</td>
-                            </tr>
-                            <tr>
-                                <td>AAQ-0087</td>
-                                <td>Disira Vimarsana </td>
-                                <td>0757935284</td>
-                                <td>7100 LKR</td>
-                            </tr>
+                            <?php
+                            //get all reminders data from the table0
+                            $stmt1 = $connect->prepare("SELECT b.`customer_name`, c.`license_plate_no`, b.`customer_contact`, a.`created_date` FROM service_order a JOIN vehicle_data c ON a.`vehicle_id`=c.`vehicle_id` JOIN customer_data b ON c.`customer_id`=b.`customer_id` WHERE `service_order_status` = 1 AND MONTH(`completed_date`) = MONTH(CURRENT_DATE()) AND YEAR(`completed_date`) = YEAR(CURRENT_DATE());;");
+                            $stmt1->execute();
+                            $stmt1->bind_result($custName, $lcnsPlateNo, $contact, $receDate);
+                            // Initialize variables to hold the results
+                            $results = [];
+                            while ($stmt1->fetch()) {
+                                $results[] = [
+                                    'emp_first_name' => $custName,
+                                    'emp_last_name' => $lcnsPlateNo,
+                                    'reminder_subject' => $contact,
+                                    'reminder_msg' => $receDate,
+                                ];
+                            }
+                            $stmt1->close();
+                            
+                            // Check if there are no results
+                            if (empty($results)) {
+                                $custName = "";
+                                $lcnsPlateNo = "";
+                                $contact = "";
+                                $receDate = "";
+                            } else {
+                                // If there are results, access them
+                                foreach ($results as $result) {
+                                    $custName = $result['emp_first_name'];
+                                    $lcnsPlateNo = $result['emp_last_name'];
+                                    $contact = $result['reminder_subject'];
+                                    $receDate = $result['reminder_msg'];
+                                    
+                                    // Process each result
+                                    echo "
+                                    <tr>
+                                        <td>".$custName."</td>
+                                        <td>".$lcnsPlateNo."</td>
+                                        <td>".$contact."</td>
+                                        <td>".$receDate."</td>
+                                    </tr>
+                                    ";
+                                }
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>

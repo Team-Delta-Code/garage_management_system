@@ -306,7 +306,7 @@ $stmt0->close();
                     </thead>
                     <tbody>
                         <?php
-                        //get all appointments data from the table0
+                        //get all reminders data from the table0
                             $stmt1 = $connect->prepare("SELECT b.`emp_first_name`, b.`emp_last_name`, a.`reminder_subject`, a.`reminder_msg`, a.`reminder_date` AS rem_date, a.`reminder_time` AS rem_time FROM reminders a JOIN employees b ON a.`employee_id`=b.`employee_id`;");
                             $stmt1->execute();
                             $stmt1->bind_result($firstName, $lastName, $subject, $msg, $date, $time);
@@ -324,7 +324,7 @@ $stmt0->close();
                             }
                             $stmt1->close();
                             
-                            // Check if there are no appointments
+                            // Check if there are no results
                             if (empty($results)) {
                                 $firstName = "";
                                 $lastName = "";
