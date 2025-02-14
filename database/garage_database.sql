@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2025 at 05:45 PM
+-- Generation Time: Feb 14, 2025 at 11:14 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,8 +42,7 @@ CREATE TABLE `appointments` (
 INSERT INTO `appointments` (`id`, `appointment_id`, `cust_name`, `service_id`, `time_stamp`) VALUES
 (1, 'apt001', 'John Doe', 'serv001', '2025-02-14 10:00:00'),
 (2, 'apt002', 'Sanath Nishantha', 'serv004', '2025-02-21 13:30:00'),
-(3, 'apt003', 'Janith Lanarole', 'serv003', '2025-02-18 09:45:00'),
-(10, 'apt004', 'Ben10 Bandara', 'serv003', '2025-02-13 23:45:00');
+(3, 'apt003', 'Janith Lanarole', 'serv003', '2025-02-18 09:45:00');
 
 -- --------------------------------------------------------
 
@@ -226,11 +225,8 @@ CREATE TABLE `reminders` (
 --
 
 INSERT INTO `reminders` (`id`, `reminder_id`, `employee_id`, `reminder_subject`, `reminder_msg`, `reminder_date`, `reminder_time`) VALUES
-(1, 'rem001', 'emp_mech1', 'Follow-up Oil Change', 'Check with customer about oil change satisfaction', '2025-02-01', '09:00:00'),
-(2, 'rem002', 'emp_tech1', 'Brake Inspection', 'Schedule follow-up brake inspection', '2025-02-02', '10:00:00'),
-(3, 'rem003', 'emp_recep1', 'Customer Call', 'Call customer about upcoming service', '2025-02-03', '11:00:00'),
-(4, 'rem004', 'emp_mgr1', 'Team Meeting', 'Monthly service team meeting', '2025-02-04', '14:00:00'),
-(5, 'rem005', 'emp_admin', 'System Update', 'Schedule system maintenance', '2025-02-05', '15:00:00');
+(6, 'rem001', 'emp_mech1', 'Pulsar Bike Motor', 'Change motor rods', '2025-02-14', '14:00:00'),
+(7, 'rem002', 'emp_mech2', 'Oil Change BMW', 'Change BMW M3 engine and brake oils', '2025-02-15', '10:30:00');
 
 -- --------------------------------------------------------
 
@@ -312,7 +308,7 @@ INSERT INTO `system_access_control` (`id`, `employee_id`, `role_id`, `password`)
 (4, 'emp_mech1', 'role_mech', 'mechPass123'),
 (5, 'emp_recep1', 'role_recep', 'recepPass123'),
 (6, 'emp_mgr1', 'role_mgr', 'mgrPass123'),
-(7, 'emp_tech1', 'role_tech', 'techPass123');
+(8, 'emp_mech2', 'role_mech', 'mechPass5283');
 
 -- --------------------------------------------------------
 
@@ -546,7 +542,7 @@ ALTER TABLE `garage_services`
 -- AUTO_INCREMENT for table `reminders`
 --
 ALTER TABLE `reminders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `service_log`
@@ -564,7 +560,7 @@ ALTER TABLE `service_order`
 -- AUTO_INCREMENT for table `system_access_control`
 --
 ALTER TABLE `system_access_control`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `transactions`
