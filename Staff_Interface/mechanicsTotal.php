@@ -6,22 +6,6 @@ $firstName = "";
 $lastName = "";
 $basicSal = "";
 
-//get all mechanics from the table
-$stmt = $connect->prepare("SELECT `employee_id`, `emp_first_name`, `emp_last_name`, `basic_salary` FROM employees WHERE role_id='role_mech';;");
-$stmt->execute();
-$stmt->bind_result($empId, $firstName, $lastName, $basicSal);
-// Initialize variables to hold the results
-$results = [];
-while ($stmt->fetch()) {
-    $results[] = [
-        'employee_id' => $empId,
-        'emp_first_name' => $firstName,
-        'emp_last_name' => $lastName,
-        'basic_salary' => $basicSal
-    ];
-}
-$stmt->close();
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -335,6 +319,22 @@ $stmt->close();
                     </thead>
                     <tbody>
                         <?php
+                            //get all mechanics from the table
+                            $stmt0 = $connect->prepare("SELECT `employee_id`, `emp_first_name`, `emp_last_name`, `basic_salary` FROM employees WHERE role_id='role_mech';;");
+                            $stmt0->execute();
+                            $stmt0->bind_result($empId, $firstName, $lastName, $basicSal);
+                            // Initialize variables to hold the results
+                            $results = [];
+                            while ($stmt0->fetch()) {
+                                $results[] = [
+                                    'employee_id' => $empId,
+                                    'emp_first_name' => $firstName,
+                                    'emp_last_name' => $lastName,
+                                    'basic_salary' => $basicSal
+                                ];
+                            }
+                            $stmt0->close();
+                            
                             // Check if there are no appointments
                             if (empty($results)) {
                                 $empId = "";

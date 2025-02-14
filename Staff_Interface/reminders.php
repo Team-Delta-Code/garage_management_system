@@ -1,26 +1,20 @@
 <?php
 include('main/sessionChecker.php');
 
-//count follow-ups
-$stmt = $connect->prepare("SELECT COUNT(reminder_id) AS followups FROM reminders WHERE reminder_date >= CURRENT_DATE;");
-$stmt->execute();
-$stmt->bind_result($followups);
-$stmt->fetch();
-$stmt->close();
-//if there are no sales today amount is set to 0
-if($followups == null OR $followups == ''){
-    $followups = 0;
-}
+//reset reminders view
+$stmt0 = $connect->prepare("DELETE FROM reminders WHERE DATE(`reminder_date`) < DATE(CURRENT_DATE());");
+$stmt0->execute();
+$stmt0->close();
 
-//count service dues
-$stmt = $connect->prepare("SELECT COUNT(reminder_id) FROM reminders WHERE reminder_date < CURRENT_DATE;");
-$stmt->execute();
-$stmt->bind_result($dueServices);
-$stmt->fetch();
-$stmt->close();
+//count follow-ups
+$stmt1 = $connect->prepare("SELECT COUNT(reminder_id) AS reminders FROM reminders WHERE reminder_date >= CURRENT_DATE;");
+$stmt1->execute();
+$stmt1->bind_result($reminders);
+$stmt1->fetch();
+$stmt1->close();
 //if there are no sales today amount is set to 0
-if($dueServices == null OR $dueServices == ''){
-    $dueServices = 0;
+if($reminders == null OR $reminders == ''){
+    $reminders = 0;
 }
 
 ?>
@@ -96,18 +90,8 @@ if($dueServices == null OR $dueServices == ''){
             <a href="reminderFollowUps.php">
                 <div class="dashboard-card">
                     <div class="card-content">
-                        <div class="card-title">Follow-ups</div>
-                        <div class="card-value"><?php echo $followups ?></div>
-                    </div>
-                    <div class="card-icon">📞</div>
-                </div>
-            </a>
-
-            <a href="remindersDue.php">
-                <div class="dashboard-card">
-                    <div class="card-content">
-                        <div class="card-title">Service Due</div>
-                        <div class="card-value"><?php echo $dueServices ?></div>
+                        <div class="card-title">All Reminders</div>
+                        <div class="card-value"><?php echo $reminders ?></div>
                     </div>
                     <div class="card-icon">🔔</div>
                 </div>

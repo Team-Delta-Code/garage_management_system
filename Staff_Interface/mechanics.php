@@ -2,33 +2,33 @@
 include('main/sessionChecker.php');
 
 //count all mechanics
-$stmt = $connect->prepare("SELECT COUNT(*) as mechTotal FROM employees WHERE role_id='role_mech';");
-$stmt->execute();
-$stmt->bind_result($mechTotal);
-$stmt->fetch();
-$stmt->close();
+$stmt0 = $connect->prepare("SELECT COUNT(*) as mechTotal FROM employees WHERE role_id='role_mech';");
+$stmt0->execute();
+$stmt0->bind_result($mechTotal);
+$stmt0->fetch();
+$stmt0->close();
 //if there are no mechanics, the amount is set to 0
 if($mechTotal == null OR $mechTotal == ''){
     $mechTotal = 0;
 }
 
 //count mechanics available today
-$stmt = $connect->prepare("SELECT COUNT(*) as mechAVa FROM employee_attendance WHERE role_id='role_mech' AND DATE(time_stamp) = CURDATE() AND availability = 1;");
-$stmt->execute();
-$stmt->bind_result($mechAva);
-$stmt->fetch();
-$stmt->close();
+$stmt1 = $connect->prepare("SELECT COUNT(*) as mechAVa FROM employee_attendance WHERE role_id='role_mech' AND DATE(time_stamp) = CURDATE() AND availability = 1;");
+$stmt1->execute();
+$stmt1->bind_result($mechAva);
+$stmt1->fetch();
+$stmt1->close();
 //if there are no mechanics available, amount is set to 0
 if($mechAva == null OR $mechAva == ''){
     $mechAva = 0;
 }
 
 //count mechanics who are on leave
-$stmt = $connect->prepare("SELECT COUNT(*) as mechLeave FROM employee_attendance WHERE role_id='role_mech' AND DATE(time_stamp) = CURDATE() AND availability = 0;");
-$stmt->execute();
-$stmt->bind_result($mechLeave);
-$stmt->fetch();
-$stmt->close();
+$stmt2 = $connect->prepare("SELECT COUNT(*) as mechLeave FROM employee_attendance WHERE role_id='role_mech' AND DATE(time_stamp) = CURDATE() AND availability = 0;");
+$stmt2->execute();
+$stmt2->bind_result($mechLeave);
+$stmt2->fetch();
+$stmt2->close();
 //if there are no mechanics on leave, amount is set to 0
 if($mechLeave == null OR $mechLeave == ''){
     $mechLeave = 0;

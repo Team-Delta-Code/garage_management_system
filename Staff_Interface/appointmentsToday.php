@@ -6,25 +6,9 @@ $srv = "";
 $time = "";
 
 //reset appointments view
-$stmt = $connect->prepare("DELETE FROM appointments WHERE DATE(`time_stamp`) < DATE(CURRENT_DATE());");
-$stmt->execute();
-$stmt->close();
-
-//get appointments datafor today from the table
-$stmt = $connect->prepare("SELECT a.`cust_name`, b.`service_name`, TIME(a.`time_stamp`) AS appointment_time FROM appointments a JOIN garage_services b ON a.`service_id`=b.`service_id` WHERE DATE(a.`time_stamp`)=DATE(CURRENT_DATE());");
-$stmt->execute();
-$stmt->bind_result($custName, $srv, $time);
-// Initialize variables to hold the results
-$results = [];
-while ($stmt->fetch()) {
-    $results[] = [
-        'cust_name' => $custName,
-        'service_name' => $srv,
-        'appointment_time' => $time
-    ];
-}
-$stmt->close();
-
+$stmt0 = $connect->prepare("DELETE FROM appointments WHERE DATE(`time_stamp`) < DATE(CURRENT_DATE());");
+$stmt0->execute();
+$stmt0->close();
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,7 +18,13 @@ $stmt->close();
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta name="author" content="Team Delta Code">
 	<title>Today Appointments | Ushan Motors</title>
-	<link rel="stylesheet" type="text/css" href="styles/mainStyle.css">
+	<link rel="stylesheet" type="text/css" href="styles/mainStyle.css?v=<?php echo time(); ?>">
+
+    <!-- force refresh -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
 
     <style type="text/css">
         .report-header {
@@ -242,29 +232,38 @@ $stmt->close();
                         </thead>
                         <tbody>
                             <?php
-                            // Check if there are no appointments
-                            if (empty($results)) {
-                                $custName = "";
-                                $srv = "";
-                                $time = "";
+                            //get appointments data for today from the table
+                            $stmt1 = $connect->prepare("SELECT a.`cust_name`, b.`service_name`, TIME(a.`time_stamp`) AS appointment_time FROM appointments a JOIN garage_services b ON a.`service_id`=b.`service_id` WHERE DATE(a.`time_stamp`)=DATE(CURRENT_DATE());");
+                            $stmt1->execute();
+                            $stmt1->bind_result($custName, $srv, $time);
+                            // Initialize variables to hold the results
+                            $results = [];
+                            while ($stmt1->fetch()) {
+                                $results[] = [
+                                    'cust_name' => $custName,
+                                    'service_name' => $srv,
+                                    'appointment_time' => $time
+                                ];
+                            }
+                            $stmt1->close();
+                            
+                            // Force array evaluation
+                            $currentResults = array_values($results);
+                            
+                            if (count($currentResults) === 0) {
+                                echo "<tr><td colspan='3' style='text-align: center;'>No appointments scheduled for today</td></tr>";
                             } else {
-                                // If there are results, you can access them like this:
-                                foreach ($results as $result) {
-                                    $custName = $result['cust_name'];
-                                    $srv = $result['service_name'];
-                                    $time = $result['appointment_time'];
+                                foreach ($currentResults as $result) {
+                                    // Add a debug print to see what's happening
+                                    error_log(print_r($result, true));
                                     
-                                    // Process each result as needed
-                                    echo "
-                                    <tr>
-                                        <td>".$custName."</td>
-                                        <td>".$srv."</td>
-                                        <td>".$time."</td>
-                                    </tr>
-                                    ";
+                                    echo "<tr>
+                                        <td>".htmlspecialchars($result['cust_name'])."</td>
+                                        <td>".htmlspecialchars($result['service_name'])."</td>
+                                        <td>".htmlspecialchars($result['appointment_time'])."</td>
+                                    </tr>";
                                 }
                             }
-                            
                             ?>
                         </tbody>
                     </table>
@@ -274,6 +273,6 @@ $stmt->close();
 
             
     </main>
-    <script type="text/javascript" src="js/mainScript.js"></script>
+    <script type="text/javascript" src="js/mainScript.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

@@ -1,5 +1,28 @@
 <?php
 include('main/sessionChecker.php');
+
+//count repair in progress
+$stmt0 = $connect->prepare("SELECT COUNT(*) AS inProgress FROM service_order WHERE `service_order_status` = 0;");
+$stmt0->execute();
+$stmt0->bind_result($inProgress);
+$stmt0->fetch();
+$stmt0->close();
+//if there are no sales today amount is set to 0
+if($inProgress == null OR $inProgress == ''){
+    $inProgress = 0;
+}
+
+//count repair in progress
+$stmt1 = $connect->prepare("SELECT COUNT(*) AS completed FROM service_order WHERE `service_order_status` = 1 AND MONTH(`completed_date`)=MONTH(CURRENT_DATE() AND YEAR(`completed_date`)=YEAR(CURRENT_DATE()));");
+$stmt1->execute();
+$stmt1->bind_result($completed);
+$stmt1->fetch();
+$stmt1->close();
+//if there are no sales today amount is set to 0
+if($completed == null OR $completed == ''){
+    $completed = 0;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,7 +97,7 @@ include('main/sessionChecker.php');
                 <div class="dashboard-card">
                     <div class="card-content">
                         <div class="card-title">In Progress</div>
-                        <div class="card-value">7</div>
+                        <div class="card-value"><?php echo $inProgress ?></div>
                     </div>
                     <div class="card-icon">🚗</div>
                 </div>
@@ -84,7 +107,7 @@ include('main/sessionChecker.php');
                 <div class="dashboard-card">
                     <div class="card-content">
                         <div class="card-title">Repair Completed</div>
-                        <div class="card-value">5</div>
+                        <div class="card-value"><?php echo $completed ?></div>
                     </div>
                     <div class="card-icon">✅</div>
                 </div>

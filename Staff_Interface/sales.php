@@ -2,33 +2,33 @@
 include('main/sessionChecker.php');
 
 //count sales amount for the day
-$stmt = $connect->prepare("SELECT SUM(amount) as sales_amount FROM transactions WHERE DAY(time_stamp) = DAY(CURRENT_DATE()) AND MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
-$stmt->execute();
-$stmt->bind_result($sales_amount);
-$stmt->fetch();
-$stmt->close();
+$stmt0 = $connect->prepare("SELECT SUM(amount) as sales_amount FROM transactions WHERE DAY(time_stamp) = DAY(CURRENT_DATE()) AND MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
+$stmt0->execute();
+$stmt0->bind_result($sales_amount);
+$stmt0->fetch();
+$stmt0->close();
 //if there are no sales today amount is set to 0
 if($sales_amount == null OR $sales_amount == ''){
     $sales_amount = 0;
 }
 
 //count monthly revenue for the current month
-$stmt = $connect->prepare("SELECT SUM(amount) as monthly_revenue FROM transactions WHERE MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
-$stmt->execute();
-$stmt->bind_result($monthly_revenue);
-$stmt->fetch();
-$stmt->close();
+$stmt1 = $connect->prepare("SELECT SUM(amount) as monthly_revenue FROM transactions WHERE MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
+$stmt1->execute();
+$stmt1->bind_result($monthly_revenue);
+$stmt1->fetch();
+$stmt1->close();
 //if there are no sales for current month amount is set to 0
 if($monthly_revenue == null OR $monthly_revenue == ''){
     $monthly_revenue = 0;
 }
 
 //check pending payments
-$stmt = $connect->prepare("SELECT COUNT(*) as pending_count FROM service_order so LEFT JOIN transactions t ON so.service_order_id = t.service_order_id WHERE so.service_order_status = 1 AND t.transaction_id IS NULL;");
-$stmt->execute();
-$stmt->bind_result($pending_count);
-$stmt->fetch();
-$stmt->close();
+$stmt2 = $connect->prepare("SELECT COUNT(*) as pending_count FROM service_order so LEFT JOIN transactions t ON so.service_order_id = t.service_order_id WHERE so.service_order_status = 1 AND t.transaction_id IS NULL;");
+$stmt2->execute();
+$stmt2->bind_result($pending_count);
+$stmt2->fetch();
+$stmt2->close();
 
 ?>
 <!DOCTYPE html>

@@ -2,27 +2,27 @@
 include('main/sessionChecker.php');
 
 //reset appointments view
-$stmt = $connect->prepare("DELETE FROM appointments WHERE DATE(`time_stamp`) < DATE(CURRENT_DATE());");
-$stmt->execute();
-$stmt->close();
+$stmt0 = $connect->prepare("DELETE FROM appointments WHERE DATE(`time_stamp`) < DATE(CURRENT_DATE());");
+$stmt0->execute();
+$stmt0->close();
 
 //count today appointments
-$stmt = $connect->prepare("SELECT COUNT(*) as apptTotal FROM appointments WHERE DATE(`time_stamp`) = DATE(CURRENT_DATE());");
-$stmt->execute();
-$stmt->bind_result($apptTotal);
-$stmt->fetch();
-$stmt->close();
+$stmt1 = $connect->prepare("SELECT COUNT(*) as apptTotal FROM appointments WHERE DATE(`time_stamp`) = DATE(CURRENT_DATE());");
+$stmt1->execute();
+$stmt1->bind_result($apptTotal);
+$stmt1->fetch();
+$stmt1->close();
 //if there are no appointments, the amount is set to 0
 if($apptTotal == null OR $apptTotal == ''){
     $apptTotal = 0;
 }
 
 //count all appointments
-$stmt = $connect->prepare("SELECT COUNT(*) as apptAll FROM appointments;");
-$stmt->execute();
-$stmt->bind_result($apptAll);
-$stmt->fetch();
-$stmt->close();
+$stmt2 = $connect->prepare("SELECT COUNT(*) as apptAll FROM appointments;");
+$stmt2->execute();
+$stmt2->bind_result($apptAll);
+$stmt2->fetch();
+$stmt2->close();
 //if there are no appointments, the amount is set to 0
 if($apptAll == null OR $apptAll == ''){
     $apptAll = 0;

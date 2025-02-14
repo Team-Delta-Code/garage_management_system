@@ -7,25 +7,9 @@ $date = "";
 $time = "";
 
 //reset appointments view
-$stmt = $connect->prepare("DELETE FROM appointments WHERE DATE(`time_stamp`) < DATE(CURRENT_DATE());");
-$stmt->execute();
-$stmt->close();
-
-//get all appointments data from the table
-$stmt = $connect->prepare("SELECT a.`cust_name`, b.`service_name`, DATE(a.`time_stamp`) AS appointment_date, TIME(a.`time_stamp`) AS appointment_time FROM appointments a JOIN garage_services b ON a.`service_id`=b.`service_id`;");
-$stmt->execute();
-$stmt->bind_result($custName, $srv, $date, $time);
-// Initialize variables to hold the results
-$results = [];
-while ($stmt->fetch()) {
-    $results[] = [
-        'cust_name' => $custName,
-        'service_name' => $srv,
-        'appointment_date' => $date,
-        'appointment_time' => $time
-    ];
-}
-$stmt->close();
+$stmt0 = $connect->prepare("DELETE FROM appointments WHERE DATE(`time_stamp`) < DATE(CURRENT_DATE());");
+$stmt0->execute();
+$stmt0->close();
 
 ?>
 <!DOCTYPE html>
@@ -247,6 +231,22 @@ $stmt->close();
                     </thead>
                     <tbody>
                         <?php
+                            //get all appointments data from the table
+                            $stmt1 = $connect->prepare("SELECT a.`cust_name`, b.`service_name`, DATE(a.`time_stamp`) AS appointment_date, TIME(a.`time_stamp`) AS appointment_time FROM appointments a JOIN garage_services b ON a.`service_id`=b.`service_id`;");
+                            $stmt1->execute();
+                            $stmt1->bind_result($custName, $srv, $date, $time);
+                            // Initialize variables to hold the results
+                            $results = [];
+                            while ($stmt1->fetch()) {
+                                $results[] = [
+                                    'cust_name' => $custName,
+                                    'service_name' => $srv,
+                                    'appointment_date' => $date,
+                                    'appointment_time' => $time
+                                ];
+                            }
+                            $stmt1->close();
+                            
                             // Check if there are no appointments
                             if (empty($results)) {
                                 $custName = "";

@@ -2,32 +2,32 @@
 include('main/sessionChecker.php');
 
 //count sales for the current month
-$stmt = $connect->prepare("SELECT COUNT(*) as sales_count FROM transactions WHERE MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
-$stmt->execute();
-$stmt->bind_result($sales_count);
-$stmt->fetch();
-$stmt->close();
+$stmt0 = $connect->prepare("SELECT COUNT(*) as sales_count FROM transactions WHERE MONTH(time_stamp) = MONTH(CURRENT_DATE()) AND YEAR(time_stamp) = YEAR(CURRENT_DATE());");
+$stmt0->execute();
+$stmt0->bind_result($sales_count);
+$stmt0->fetch();
+$stmt0->close();
 
 //count vehicle to be repaired in the current month
-$stmt = $connect->prepare("SELECT COUNT(*) as to_repair_count FROM service_order WHERE service_order_status = 0;");
-$stmt->execute();
-$stmt->bind_result($to_repair_count);
-$stmt->fetch();
-$stmt->close();
+$stmt1 = $connect->prepare("SELECT COUNT(*) as to_repair_count FROM service_order WHERE service_order_status = 0;");
+$stmt1->execute();
+$stmt1->bind_result($to_repair_count);
+$stmt1->fetch();
+$stmt1->close();
 
 //count reminders
-$stmt = $connect->prepare("SELECT COUNT(*) as reminder_count FROM reminders");
-$stmt->execute();
-$stmt->bind_result($reminder_count);
-$stmt->fetch();
-$stmt->close();
+$stmt2 = $connect->prepare("SELECT COUNT(*) as reminder_count FROM reminders");
+$stmt2->execute();
+$stmt2->bind_result($reminder_count);
+$stmt2->fetch();
+$stmt2->close();
 
 //count mechanics
-$stmt = $connect->prepare("SELECT COUNT(*) as mechanic_count FROM employees WHERE role_id='role_mech';");
-$stmt->execute();
-$stmt->bind_result($mech_count);
-$stmt->fetch();
-$stmt->close();
+$stmt3 = $connect->prepare("SELECT COUNT(*) as mechanic_count FROM employees WHERE role_id='role_mech';");
+$stmt3->execute();
+$stmt3->bind_result($mech_count);
+$stmt3->fetch();
+$stmt3->close();
 
 ?>
 <!DOCTYPE html>

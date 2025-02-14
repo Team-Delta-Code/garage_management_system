@@ -1,5 +1,11 @@
 <?php
 include('main/sessionChecker.php');
+
+//reset reminders view
+$stmt0 = $connect->prepare("DELETE FROM reminders WHERE DATE(`reminder_date`) < DATE(CURRENT_DATE());");
+$stmt0->execute();
+$stmt0->close();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,7 +14,7 @@ include('main/sessionChecker.php');
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta name="author" content="Team Delta Code">
-	<title>Reminders Follow-Ups | Ushan Motors</title>
+	<title>Reminders List | Ushan Motors</title>
 	<link rel="stylesheet" type="text/css" href="styles/mainStyle.css">
 
     <style type="text/css">
@@ -277,7 +283,7 @@ include('main/sessionChecker.php');
     <main class="main-content">
         <div class="top-bar">
             <div class="breadcrumb">
-                ⏲️<a href="dashboard.php">Home</a> > <a href="reminders.php">Reminders</a> > <a href="#">Follow-Ups</a>
+                ⏲️<a href="dashboard.php">Home</a> > <a href="reminders.php">Reminders</a> > <a href="#">All Reminders</a>
             </div>
             <?php include('profile_icon.php') ?>
         </div>
@@ -291,52 +297,64 @@ include('main/sessionChecker.php');
                 <table class="transactions-table reminders-table">
                     <thead>
                         <tr>
-                            <th>Priority</th>
-                            <th>Customer</th>
-                            <th>Vehicle</th>
-                            <th>Follow-up Type</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Assigned Mechanic</th>
                             <th>Date</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th>Time</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><span class="priority high">High</span></td>
-                            <td>John Doe</td>
-                            <td>Toyota Camry</td>
-                            <td>Service Check</td>
-                            <td>Feb 5, 2024</td>
-                            <td><span class="status pending">Pending</span></td>
-                            <td>
-                                <button class="action-btn" title="Call Customer">📞</button>
-                                <button class="action-btn" title="Edit Reminder">📝</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span class="priority medium">Medium</span></td>
-                            <td>Sarah Smith</td>
-                            <td>Honda Civic</td>
-                            <td>Repair Follow-up</td>
-                            <td>Feb 10, 2024</td>
-                            <td><span class="status pending">Pending</span></td>
-                            <td>
-                                <button class="action-btn" title="Call Customer">📞</button>
-                                <button class="action-btn" title="Edit Reminder">📝</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span class="priority low">Low</span></td>
-                            <td>Mike Johnson</td>
-                            <td>Ford F-150</td>
-                            <td>Warranty Check</td>
-                            <td>Feb 15, 2024</td>
-                            <td><span class="status pending">Pending</span></td>
-                            <td>
-                                <button class="action-btn" title="Call Customer">📞</button>
-                                <button class="action-btn" title="Edit Reminder">📝</button>
-                            </td>
-                        </tr>
+                        <?php
+                        //get all appointments data from the table0
+                            $stmt1 = $connect->prepare("SELECT b.`emp_first_name`, b.`emp_last_name`, a.`reminder_subject`, a.`reminder_msg`, a.`reminder_date` AS rem_date, a.`reminder_time` AS rem_time FROM reminders a JOIN employees b ON a.`employee_id`=b.`employee_id`;");
+                            $stmt1->execute();
+                            $stmt1->bind_result($firstName, $lastName, $subject, $msg, $date, $time);
+                            // Initialize variables to hold the results
+                            $results = [];
+                            while ($stmt1->fetch()) {
+                                $results[] = [
+                                    'emp_first_name' => $firstName,
+                                    'emp_last_name' => $lastName,
+                                    'reminder_subject' => $subject,
+                                    'reminder_msg' => $msg,
+                                    'rem_date' => $date,
+                                    'rem_time' => $time
+                                ];
+                            }
+                            $stmt1->close();
+                            
+                            // Check if there are no appointments
+                            if (empty($results)) {
+                                $firstName = "";
+                                $lastName = "";
+                                $subject = "";
+                                $msg = "";
+                                $date = "";
+                                $time = "";
+                            } else {
+                                // If there are results, access them
+                                foreach ($results as $result) {
+                                    $firstName = $result['emp_first_name'];
+                                    $lastName = $result['emp_last_name'];
+                                    $subject = $result['reminder_subject'];
+                                    $msg = $result['reminder_msg'];
+                                    $date = $result['rem_date'];
+                                    $time = $result['rem_time'];
+                                    
+                                    // Process each result
+                                    echo "
+                                    <tr>
+                                        <td>".$subject."</td>
+                                        <td>".$msg."</td>
+                                        <td>".$firstName." ".$lastName."</td>
+                                        <td>".$date."</td>
+                                        <td>".$time."</td>
+                                    </tr>
+                                    ";
+                                }
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>

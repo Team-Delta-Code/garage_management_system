@@ -5,21 +5,6 @@ $empId = "";
 $firstName = "";
 $lastName = "";
 
-//get all mechanics from the table
-$stmt = $connect->prepare("SELECT `employee_id`, `emp_first_name`, `emp_last_name` FROM employees a JOIN employee_attendance b ON a.`employee_id`=b.`emp_id` WHERE a.`role_id`='role_mech' AND DATE(time_stamp) = CURDATE() AND availability = 1;");
-$stmt->execute();
-$stmt->bind_result($empId, $firstName, $lastName);
-// Initialize variables to hold the results
-$results = [];
-while ($stmt->fetch()) {
-    $results[] = [
-        'employee_id' => $empId,
-        'emp_first_name' => $firstName,
-        'emp_last_name' => $lastName
-    ];
-}
-$stmt->close();
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -321,11 +306,27 @@ $stmt->close();
                     <tbody>
                         <tr>
                             <?php
+                            //get all mechanics from the table
+                            $stmt0 = $connect->prepare("SELECT `employee_id`, `emp_first_name`, `emp_last_name` FROM employees a JOIN employee_attendance b ON a.`employee_id`=b.`emp_id` WHERE a.`role_id`='role_mech' AND DATE(time_stamp) = CURDATE() AND availability = 1;");
+                            $stmt0->execute();
+                            $stmt0->bind_result($empId, $firstName, $lastName);
+                            // Initialize variables to hold the results
+                            $results = [];
+                            while ($stmt0->fetch()) {
+                                $results[] = [
+                                    'employee_id' => $empId,
+                                    'emp_first_name' => $firstName,
+                                    'emp_last_name' => $lastName
+                                ];
+                            }
+                            $stmt0->close();
+
                             // Check if there are no appointments
                             if (empty($results)) {
                                 $empId = "";
                                 $firstName = "";
                                 $lastName = "";
+                                echo "<tr><td colspan='2' style='text-align: center;'>No mechanics available today</td></tr>";
                             } else {
                                 // If there are results, access them
                                 foreach ($results as $result) {

@@ -177,7 +177,7 @@ include('main/sessionChecker.php');
 	<aside class="sidebar">
         <div class="sidebar-logo">USHAN Motors</div>
         <ul class="sidebar-menu">
-            <li class="menu-item">
+            <li class="menu-item active">
             	<a href="dashboard.php">
                 	<span class="icon">📊</span>
                 	<span class="menu-text">Dashboard</span>
@@ -195,7 +195,7 @@ include('main/sessionChecker.php');
                 	<span class="menu-text">Vehicle to Repair</span>
                 </a>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
                 <a href="reminders.php">
                 	<span class="icon">⏰</span>
         	        <span class="menu-text">Reminders</span>
@@ -227,16 +227,7 @@ include('main/sessionChecker.php');
             <div class="breadcrumb">
                 ⏲️<a href="dashboard.php">Home</a> > <a href="#">Settings</a>
             </div>
-            <div>
-                <a href="#" class="user-profile" onclick="toggleDropdown(event)">
-                    <div class="user-avatar">SF</div>
-                    <div class="user-name">Shank Fury</div>
-                </a>
-                <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="settings.php">Settings</a>
-                    <a href="logout.php">Logout</a>
-                </div>
-            </div>
+            <?php include('profile_icon.php') ?>
         </div>
 
         <div class="dashboard-grid">
