@@ -1,5 +1,79 @@
 <?php
 include('main/sessionChecker.php');
+
+if ($_POST) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
+    // Check database connection
+    if (!$connect) {
+        die("Database connection failed: " . mysqli_connect_error());
+    }
+
+    // Collect form data
+    $oldPsw = $_POST['oldPsw'];
+    $newPsw = $_POST['newPsw'];
+    $confirmPsw = $_POST['confirmPsw'];
+
+    //compare passwords
+    //--to be implemented--
+
+    //generate vehicle id
+    $veh_id = "veh".generateFiveDigitNumber();
+    //check if the generated number already exists in the database
+    //if yes generate again
+    while(checkItemExists($connect, $cust_id, "vehicle_data", "vehicle_id")) {
+        $veh_id = "cust".generateFiveDigitNumber();
+    }
+
+    //generate service order id
+    $serv_ord_id = "ord".generateFiveDigitNumber();
+
+    while(checkItemExists($connect, $serv_ord_id, "service_order", "service_order_id")) {
+        $serv_ord_id = "ord".generateFiveDigitNumber();
+    }
+
+    //fetch service data
+    $stmt0 = $connect->prepare("SELECT service_id FROM garage_services WHERE service_name = ?");
+    $stmt0->bind_param("s", $service);
+    $stmt0->execute();
+    $stmt0->bind_result($service_id);
+    $stmt0->fetch();
+    $stmt0->close();
+
+    //insert data into customer data
+    $stmt = $connect->prepare("INSERT INTO customer_data (customer_id, customer_name, customer_contact, customer_email, customer_address) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $cust_id, $cust_name, $cust_contact, $cust_email, $cust_address);
+
+    //insert data into vehicle data
+    $stmt1 = $connect->prepare("INSERT INTO vehicle_data (vehicle_id, customer_id, type, brand, model, license_plate_no) VALUES (?, ?, ?, ?, ?, ?);");
+    $stmt1->bind_param("ssssss", $veh_id, $cust_id, $veh_type, $veh_brand, $veh_model, $veh_plate);
+
+    //insert data into service order id
+    $stmt2 = $connect->prepare("INSERT INTO service_order (service_order_id, vehicle_id, service_id, created_date, service_order_status) VALUES (?, ?, ?, CURDATE(), ?)");
+    $stmt2->bind_param("sssi", $serv_ord_id, $veh_id, $service_id, $service_order_status);
+    
+    if ($stmt->execute()) {
+        if ($stmt1->execute()) {
+            if ($stmt2->execute()) {
+                header("Location: " . $_SERVER['PHP_SELF']);
+            } else {
+                echo "Service Order Insert Error: " . $stmt2->error;
+            }
+        } else {
+            echo "Vehicle Data Insert Error: " . $stmt1->error;
+        }
+    } else {
+        echo "Customer Data Insert Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $stmt1->close();
+    $stmt2->close();
+    $connect->close();
+    exit(); // Stop further processing
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -233,10 +307,10 @@ include('main/sessionChecker.php');
         <div class="dashboard-grid">
             <div class="container">
                 <div class="header-div">
-                    <h1>Shank Fury</h1>
+                    <h1><?php echo $firstName." ".$lastName; ?></h1>
                 </div>
                 <div class="header-div">
-                    <span class="header">Position: </span><span>System Administrator</span>
+                    <span class="header">Position: </span><span><?php echo $role; ?></span>
                 </div>
                 <div class="header-div">
                     <span class="header">Change Password</span><br>

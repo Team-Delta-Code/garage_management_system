@@ -1,6 +1,7 @@
 <?php
 // Database connection
 include('main/connect.php');
+include('main/functions.php');
 
 // Start session
 session_start();
@@ -34,29 +35,22 @@ if(isset($_SESSION['employee_id'])) {
             $stmt->execute();
             $result = $stmt->get_result();
 
-            // if ($result->num_rows == 1) {
-            //     $value = $result->fetch_assoc();
-            //     // Assuming the password is stored hashed
-            //     if (password_verify($password, $value['password'])) {
-            //         // Set session
-            //         $_SESSION['employee_id'] = $value['employee_id'];
-            //         echo "Login success!";
-            //         header('Location: dashboard.php');
-            //     } else {
-            //         echo "Incorrect User Credentials";
-            //     }
-            // } else {
-            //     echo "Username doesn't exist";
-            // }
-
             //session creation for the current user
             if($result->num_rows == 1) {
                 $value = $result->fetch_assoc();
-                $_SESSION['employee_id'] = $value['employee_id'];
-                echo "Login success";
-                header('Location: dashboard.php');
+                $stored_password = $value['password'];
+                $dehashed_password = simple_dehash($stored_password);
+                
+                if($password === $dehashed_password) {
+                    // Set session
+                    $_SESSION['employee_id'] = $value['employee_id'];
+                    echo "Login success!";
+                    header('Location: dashboard.php');
+                } else {
+                    echo "Incorrect password";
+                }
             } else {
-                echo "Incorrect credentials or user does not exist";
+                echo "Username doesn't exist";
             }
         }
     }

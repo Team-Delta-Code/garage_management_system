@@ -28,4 +28,48 @@ function checkItemExists($connection, $itemName, $tableName, $column_name) {
     return $exists;
 }
 
+//hash strings
+function simple_hash($input_string) {
+    $result = '';
+    $shift = strlen($input_string) % 26; // Derive shift value from string length
+    
+    // Process each character
+    for ($i = 0; $i < strlen($input_string); $i++) {
+        $char = $input_string[$i];
+        $ascii = ord($char);
+        
+        // Apply transformation
+        $transformed = $ascii + $shift;
+        
+        // Convert to hex and append to result
+        $result .= dechex($transformed);
+    }
+    
+    return $result;
+}
+
+//dehash strings
+function simple_dehash($hashed_string) {
+    $result = '';
+    $hex_pairs = str_split($hashed_string, 2);
+    
+    // First, convert hex pairs to ASCII values
+    $ascii_values = array_map('hexdec', $hex_pairs);
+    
+    // Calculate shift value - need to do this after first character is processed
+    $first_char_ascii = $ascii_values[0];
+    $shift = count($ascii_values) % 26;
+    
+    // Process each value
+    foreach ($ascii_values as $ascii) {
+        // Reverse the transformation
+        $original_ascii = $ascii - $shift;
+        
+        // Convert back to character
+        $result .= chr($original_ascii);
+    }
+    
+    return $result;
+}
+
 ?>
