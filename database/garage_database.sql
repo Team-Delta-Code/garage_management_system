@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2025 at 11:14 AM
+-- Generation Time: Mar 27, 2025 at 07:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,15 +34,6 @@ CREATE TABLE `appointments` (
   `service_id` varchar(20) NOT NULL,
   `time_stamp` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `appointments`
---
-
-INSERT INTO `appointments` (`id`, `appointment_id`, `cust_name`, `service_id`, `time_stamp`) VALUES
-(1, 'apt001', 'John Doe', 'serv001', '2025-02-14 10:00:00'),
-(2, 'apt002', 'Sanath Nishantha', 'serv004', '2025-02-21 13:30:00'),
-(3, 'apt003', 'Janith Lanarole', 'serv003', '2025-02-18 09:45:00');
 
 -- --------------------------------------------------------
 
@@ -220,14 +211,6 @@ CREATE TABLE `reminders` (
   `reminder_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `reminders`
---
-
-INSERT INTO `reminders` (`id`, `reminder_id`, `employee_id`, `reminder_subject`, `reminder_msg`, `reminder_date`, `reminder_time`) VALUES
-(6, 'rem001', 'emp_mech1', 'Pulsar Bike Motor', 'Change motor rods', '2025-02-14', '14:00:00'),
-(7, 'rem002', 'emp_mech2', 'Oil Change BMW', 'Change BMW M3 engine and brake oils', '2025-02-15', '10:30:00');
-
 -- --------------------------------------------------------
 
 --
@@ -303,12 +286,12 @@ CREATE TABLE `system_access_control` (
 --
 
 INSERT INTO `system_access_control` (`id`, `employee_id`, `role_id`, `password`) VALUES
-(2, 'emp_admin', 'role_admin', 'garageAdmin'),
-(3, 'emp_admin1', 'role_admin', 'adminPass123'),
-(4, 'emp_mech1', 'role_mech', 'mechPass123'),
-(5, 'emp_recep1', 'role_recep', 'recepPass123'),
-(6, 'emp_mgr1', 'role_mgr', 'mgrPass123'),
-(8, 'emp_mech2', 'role_mech', 'mechPass5283');
+(2, 'emp_admin', 'role_admin', '726c7d6c72704c6f787479'),
+(3, 'emp_admin1', 'role_admin', '6d7079757a5c6d7f7f3d3e3f'),
+(4, 'emp_mech1', 'role_mech', '78706e735b6c7e7e3c3d3e'),
+(5, 'emp_recep1', 'role_recep', '7e716f717c5c6d7f7f3d3e3f'),
+(6, 'emp_mgr1', 'role_mgr', '77717c5a6b7d7d3b3c3d'),
+(8, 'emp_mech2', 'role_mech', '79716f745c6d7f7f413e443f');
 
 -- --------------------------------------------------------
 

@@ -12,10 +12,6 @@ include('main/sessionChecker.php');
 	<link rel="stylesheet" type="text/css" href="styles/mainStyle.css">
 
     <style type="text/css">
-
-
-
-
         .sidebar ul {
             list-style: none;
             padding: 0;
@@ -95,8 +91,6 @@ include('main/sessionChecker.php');
         .add-record button:hover {
             background-color: #0056b3;
         }
-
-
     </style>
 
 </head>
