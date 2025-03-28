@@ -170,9 +170,11 @@
         color: white;
         text-align: center;
         padding: 1rem;
+        width: 100%;
         position: fixed;
         bottom: 0;
-        width: 100%;
+        left: 0;
+        z-index: 1000; /* Ensure footer stays on top of other content */
       }
 
       @media (max-width: 768px) {
@@ -242,14 +244,66 @@
       </p>
 
       <div class="button-group">
-        <a href="payment-success.html"
+<a href="javascript:void(0);" onclick="validateForm()"
+
           ><button class="btn btn-confirm">Confirm</button></a
         >
         <a href="full service page.html"
           ><button class="btn btn-cancel">Cancel</button></a
         >
       </div>
-    </main>
+      <script>
+        function validateForm() {
+            // Get all input and select elements
+            const customerName = document.querySelector('input[type="text"]');
+            const serviceSelect = document.querySelector('select');
+            const contactNumber = document.querySelector('input[type="tel"]');
+    
+            // Create an array to store error messages
+            const errors = [];
+    
+            // Validate Customer Name
+            if (!customerName.value.trim()) {
+                errors.push("Please enter your name.");
+                customerName.style.borderColor = 'red';
+            } else {
+                customerName.style.borderColor = '';
+            }
+    
+            // Validate Service Selection
+            if (serviceSelect.value === '--Select--') {
+                errors.push("Please select a service.");
+                serviceSelect.style.borderColor = 'red';
+            } else {
+                serviceSelect.style.borderColor = '';
+            }
+    
+            // Validate Contact Number
+            const phoneRegex = /^[0-9]{10}$/; // Assumes 10-digit phone number
+            if (!contactNumber.value.trim()) {
+                errors.push("Please enter your contact number.");
+                contactNumber.style.borderColor = 'red';
+            } else if (!phoneRegex.test(contactNumber.value.trim())) {
+                errors.push("Please enter a valid 10-digit contact number.");
+                contactNumber.style.borderColor = 'red';
+            } else {
+                contactNumber.style.borderColor = '';
+            }
+    
+            // Display errors or proceed with booking
+            if (errors.length > 0) {
+                // Create error message
+                const errorMessage = errors.join('\n');
+                alert(errorMessage);
+            } else {
+                // If all validations pass, proceed to booking confirmation
+                alert('Booking Confirmed! A representative will contact you shortly.');
+                // You could add additional logic here like form submission
+                window.location.href = 'makepayment.html';
+            }
+        }
+        </script>
+
 
     <footer class="footer">© 2024 Ushan Motors. All Rights Reserved</footer>
   </body>

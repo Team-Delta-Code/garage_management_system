@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Payment - Ushan Motors</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #a5b4fc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .nav-container {
+        background-color: #1a237e;
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .year-badge {
+        width: 50px;
+        height: 50px;
+        background-color: black;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      .year-badge img {
+        width: 100%;
+      }
+
+      .company-name {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+      .payment-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 100%;
+        max-width: 500px;
+        margin-top: 100px;
+      }
+
+      .payment-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+
+      .form-control.error {
+        border-color: red;
+      }
+
+      .error-message {
+        color: red;
+        font-size: 0.8rem;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .card-details {
+        display: flex;
+        gap: 15px;
+      }
+
+      .card-details > div {
+        flex: 1;
+      }
+
+      .submit-btn {
+        background-color: #1a237e;
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .submit-btn:hover {
+        background-color: #121b6b;
+      }
+
+      .submit-btn:disabled {
+        background-color: #888;
+        cursor: not-allowed;
+      }
+
+      .payment-info {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .payment-info h2 {
+        color: #1a1464;
+        margin-bottom: 10px;
+      }
+
+      .payment-info p {
+        color: #333;
+      }
+
+      footer {
+        background-color: #1a1464;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      @media (max-width: 600px) {
+        .payment-container {
+          padding: 20px;
+          margin-top: 80px;
+        }
+
+        .card-details {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header with navigation -->
+    <nav class="nav-container">
+      <div class="logo-section">
+        <!-- 25 Years badge -->
+        <div class="year-badge">
+          <img src="images/25 years.png" alt="logo" />
+        </div>
+        <!-- Company name -->
+        <div class="company-name">Ushan Motors</div>
+      </div>
+      <!-- Navigation menu -->
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="service page.html">Service</a>
+        <a href="about page.html">About</a>
+        <a href="contact page.html">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Payment Container -->
+    <div class="payment-container">
+      <div class="payment-info">
+        <h2>Card Payment</h2>
+        <p>Booking Fee: LKR 500</p>
+      </div>
+
+      <form
+        id="paymentForm"
+        class="payment-form"
+        onsubmit="return validateForm()"
+      >
+        <div class="form-group">
+          <label for="cardName">Name on Card</label>
+          <input
+            type="text"
+            id="cardName"
+            class="form-control"
+            placeholder="John Doe"
+            required
+          />
+          <div id="cardNameError" class="error-message">
+            Please enter a valid name
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input
+            type="text"
+            id="cardNumber"
+            class="form-control"
+            placeholder="1234 5678 9012 3456"
+            required
+            maxlength="19"
+          />
+          <div id="cardNumberError" class="error-message">
+            Please enter a valid 16-digit card number
+          </div>
+        </div>
+
+        <div class="card-details">
+          <div class="form-group">
+            <label for="expiryDate">Expiry Date</label>
+            <input
+              type="text"
+              id="expiryDate"
+              class="form-control"
+              placeholder="MM/YY"
+              required
+              maxlength="5"
+            />
+            <div id="expiryDateError" class="error-message">
+              Please enter a valid expiry date (MM/YY)
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input
+              type="text"
+              id="cvv"
+              class="form-control"
+              placeholder="123"
+              required
+              maxlength="3"
+            />
+            <div id="cvvError" class="error-message">
+              Please enter a valid 3-digit CVV
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Pay LKR 500</button>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>© 2024 Ushan Motors. All Rights Reserved</footer>
+
+    <script>
+      // Card Number Formatting
+      document
+        .getElementById("cardNumber")
+        .addEventListener("input", function (e) {
+          let value = e.target.value
+            .replace(/\s+/g, "")
+            .replace(/[^0-9]/gi, "");
+          let formattedValue = value.match(/.{1,4}/g)?.join(" ") || "";
+          e.target.value = formattedValue;
+        });
+
+      // Expiry Date Formatting
+      document
+        .getElementById("expiryDate")
+        .addEventListener("input", function (e) {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length >= 2) {
+            value = value.slice(0, 2) + "/" + value.slice(2, 4);
+          }
+          e.target.value = value;
+        });
+
+      // Form Validation Function
+      function validateForm() {
+        let isValid = true;
+        const cardName = document.getElementById("cardName");
+        const cardNumber = document.getElementById("cardNumber");
+        const expiryDate = document.getElementById("expiryDate");
+        const cvv = document.getElementById("cvv");
+
+        // Name Validation
+        if (!/^[a-zA-Z\s]{3,}$/.test(cardName.value)) {
+          document.getElementById("cardNameError").style.display = "block";
+          cardName.classList.add("error");
+          isValid = false;
+        } else {
+          document.getElementById("cardNameError").style.display = "none";
+          cardName.classList.remove("error");
+        }
+
+        // Card Number Validation
+        const cardNumberClean = cardNumber.value.replace(/\s/g, "");
+        if (!/^\d{16}$/.test(cardNumberClean)) {
+          document.getElementById("cardNumberError").style.display = "block";
+          cardNumber.classList.add("error");
+          isValid = false;
+        } else {
+          document.getElementById("cardNumberError").style.display = "none";
+          cardNumber.classList.remove("error");
+        }
+
+        // Expiry Date Validation
+        const today = new Date();
+        const [month, year] = expiryDate.value.split("/");
+        const expiryDate_ = new Date(
+          2000 + parseInt(year),
+          parseInt(month) - 1
+        );
+        if (!/^\d{2}\/\d{2}$/.test(expiryDate.value) || expiryDate_ <= today) {
+          document.getElementById("expiryDateError").style.display = "block";
+          expiryDate.classList.add("error");
+          isValid = false;
+        } else {
+          document.getElementById("expiryDateError").style.display = "none";
+          expiryDate.classList.remove("error");
+        }
+
+        // CVV Validation
+        if (!/^\d{3}$/.test(cvv.value)) {
+          document.getElementById("cvvError").style.display = "block";
+          cvv.classList.add("error");
+          isValid = false;
+        } else {
+          document.getElementById("cvvError").style.display = "none";
+          cvv.classList.remove("error");
+        }
+
+        // If all validations pass, redirect to payment success page
+        if (isValid) {
+          window.location.href = "payment-success.html";
+        }
+
+        return false; // Prevent default form submission
+      }
+    </script>
+  </body>
+</html>

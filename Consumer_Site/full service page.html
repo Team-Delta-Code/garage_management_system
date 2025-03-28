@@ -158,7 +158,8 @@
         cursor: pointer;
         transition: background-color 0.3s;
         margin-bottom: 10px;
-        text-decoration: none;
+        text-decoration: none; /* Ensure no underline on button text */
+        align-items: center;
       }
 
       .book-button:hover {
@@ -221,9 +222,12 @@
 
       <section class="appointment-section">
         <h2>Book Your Appointment Today!</h2>
-        <a href="appointment-booking.html">
-          <button class="book-button">Place Appointment</button>
-        </a>
+        <a
+          href="FullService_appointment.html"
+          class="book-button"
+          style="text-align: center"
+          >Place Appointment</a
+        >
 
         <img
           class="appoinment"

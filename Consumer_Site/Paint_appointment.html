@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ushan Motors - Appointment Booking</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #a5b4fc;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nav-container {
+        background-color: #1a237e; /* Deep blue color for nav */
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed; /* Keep nav fixed at top */
+        width: 100%;
+        z-index: 1000; /* Ensure nav stays on top */
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .year-badge {
+        width: 50px; /* Adjusted size */
+        height: 50px; /* Adjusted size */
+        background-color: rgb(0, 0, 0);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.2;
+        position: absolute; /* Positioning */
+        top: 10px; /* Adjusted position */
+        left: 10px; /* Adjusted position */
+      }
+
+      .year-badge img {
+        width: 100%;
+      }
+
+      .company-name {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+      .main-content {
+        padding: 10rem 20%;
+      }
+
+      .booking-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+      }
+
+      .booking-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .form-label {
+        width: 200px;
+        font-size: 1.2rem;
+      }
+
+      .form-input {
+        padding: 0.5rem;
+        width: 300px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+      }
+
+      .booking-notice {
+        margin: 2rem 0;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        max-width: 800px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 0.5rem 2rem;
+        font-size: 1.1rem;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-confirm {
+        background-color: #1a237e;
+        color: white;
+        text-decoration: none; /* Removes the underline */
+        color: white; /* Matches the text color of its parent element */
+      }
+
+      .btn-cancel {
+        background-color: #ccc;
+        color: black;
+        text-decoration: none; /* Removes the underline */
+        color: blacks;
+      }
+
+      .btn-confirm:hover {
+        background-color: #0d47a1; /* Darker shade for hover */
+        transform: scale(1.05); /* Slightly increase size */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+      }
+
+      .btn-cancel:hover {
+        background-color: #bbb; /* Darker shade for hover */
+        transform: scale(1.05); /* Slightly increase size */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+      }
+
+      .btn-confirm:active {
+        background-color: #0b3d91; /* Even darker shade for active */
+      }
+
+      .btn-cancel:active {
+        background-color: #999; /* Even darker shade for active */
+      }
+
+      .booking-illustration {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        max-width: 300px;
+      }
+
+      .footer {
+        background-color: #1a237e;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1000; /* Ensure footer stays on top of other content */
+      }
+
+      @media (max-width: 768px) {
+        .form-group {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .form-label {
+          margin-bottom: 0.5rem;
+        }
+
+        .booking-illustration {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-container">
+      <div class="logo-section">
+        <div class="year-badge">
+          <img src="images/25 years.png" alt="logo" />
+        </div>
+        <div class="company-name">Ushan Motors</div>
+      </div>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="service page.html">Service</a>
+        <a href="about page.html">About</a>
+        <a href="contact page.html">Contact</a>
+      </div>
+    </nav>
+
+    <main class="booking-container">
+      <h1 class="booking-title">Appointment booking.</h1>
+
+      <div class="form-group">
+        <label class="form-label">Customer name</label>
+        <input type="text" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Service</label>
+        <select class="form-input">
+          <option>--Select--</option>
+          <option>Scratch and dent prepare</option>
+          <option>Touch up paint</option>
+          <option>Full body repainting</option>
+          <option>Panel painting</option>
+          <option>Custom paint jobs</option>
+          <option>Clear coat application</option>
+          <option>Paint Restoration</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Contact number</label>
+        <input type="tel" class="form-input" />
+      </div>
+
+      <p class="booking-notice">
+        Thank you for choosing our service. To confirm your appointment there is
+        booking fee of 500. LKR which secure your time slot to ensure your
+        prevented time slot, please proceed by clicking confirm to complete your
+        booking and payment.
+      </p>
+
+      <div class="button-group">
+<a href="javascript:void(0);" onclick="validateForm()"
+
+          ><button class="btn btn-confirm">Confirm</button></a
+        >
+        <a href="full service page.html"
+          ><button class="btn btn-cancel">Cancel</button></a
+        >
+      </div>
+      <script>
+        function validateForm() {
+            // Get all input and select elements
+            const customerName = document.querySelector('input[type="text"]');
+            const serviceSelect = document.querySelector('select');
+            const contactNumber = document.querySelector('input[type="tel"]');
+    
+            // Create an array to store error messages
+            const errors = [];
+    
+            // Validate Customer Name
+            if (!customerName.value.trim()) {
+                errors.push("Please enter your name.");
+                customerName.style.borderColor = 'red';
+            } else {
+                customerName.style.borderColor = '';
+            }
+    
+            // Validate Service Selection
+            if (serviceSelect.value === '--Select--') {
+                errors.push("Please select a service.");
+                serviceSelect.style.borderColor = 'red';
+            } else {
+                serviceSelect.style.borderColor = '';
+            }
+    
+            // Validate Contact Number
+            const phoneRegex = /^[0-9]{10}$/; // Assumes 10-digit phone number
+            if (!contactNumber.value.trim()) {
+                errors.push("Please enter your contact number.");
+                contactNumber.style.borderColor = 'red';
+            } else if (!phoneRegex.test(contactNumber.value.trim())) {
+                errors.push("Please enter a valid 10-digit contact number.");
+                contactNumber.style.borderColor = 'red';
+            } else {
+                contactNumber.style.borderColor = '';
+            }
+    
+            // Display errors or proceed with booking
+            if (errors.length > 0) {
+                // Create error message
+                const errorMessage = errors.join('\n');
+                alert(errorMessage);
+            } else {
+                // If all validations pass, proceed to booking confirmation
+                alert('Booking Confirmed! A representative will contact you shortly.');
+                window.location.href = 'makepayment.html'; 
+                // You could add additional logic here like form submission
+            }
+        }
+        </script>
+
+
+    <footer class="footer">© 2024 Ushan Motors. All Rights Reserved</footer>
+  </body>
+</html>
