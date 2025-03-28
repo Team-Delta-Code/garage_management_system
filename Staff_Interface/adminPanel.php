@@ -1,5 +1,28 @@
 <?php
     include("main/sessionChecker.php");
+    include("main/userManagement.php");
+
+    // Handle form submissions
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['action']) && $_POST['action'] == 'add_user') {
+            $result = addNewUser(
+                $_POST['first_name'], 
+                $_POST['last_name'], 
+                $_POST['role'], 
+                $_POST['salary'],
+                $_POST['userPwd']
+            );
+            $message = $result['message'];
+        }
+
+        if (isset($_POST['action']) && $_POST['action'] == 'remove_user') {
+            $result = removeUser(
+                $_POST['employee_id'], 
+                $_POST['confirm_employee_id']
+            );
+            $message = $result['message'];
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -179,10 +202,15 @@
             <div class="breadcrumb">
                 ⏲️<a href="dashboard.php">Home</a> > <a href="settings.php">Settings</a> > <a href="#">Admin Panel</a>
             </div>
-            <?php include('profile_icon.php') ?>
+            <?php include('profile_icon.php'); ?>
         </div>
 
         <div class="dashboard-grid">
+            <?php if (isset($message)): ?>
+                <div class="message">
+                    <?php echo $message; ?>
+                </div>
+            <?php endif; ?>
             <div class="main">
                 <div class="cards">
                     <div class="card">
@@ -191,7 +219,7 @@
                         <span style="font-size: 14px;">Position: <?php echo $role; ?></span>
                         <br><br><br><br><br><br>
                         <ul class="settings">
-                            <class="item"><a href="#"><h2>Admin Panel</h2></a></class="item">
+                            <class="item"><h2 style="color: darkblue;">Admin Panel</h2></class="item">
                         </ul>
                     </div> 
                    
@@ -208,26 +236,30 @@
 
                     <div class="card">
                         <ul class="settings">
-                            <class="item"><a href="#"><h2>Add User</h2></a>
-                                 <form>
-                                 <label for="first_name">First Name</label>
-                                 <input type="text" id="first_name" name="first_name" required>
+                            <class="item"><h2 style="color: darkblue;">Add User</h2>
+                                 <form method="POST">
+                                     <input type="hidden" name="action" value="add_user">
+                                     <label for="first_name">First Name</label>
+                                     <input type="text" id="first_name" name="first_name" required>
 
-                                 <label for="last_name">Last Name</label>
-                                 <input type="text" id="last_name" name="last_name" required>
+                                     <label for="last_name">Last Name</label>
+                                     <input type="text" id="last_name" name="last_name" required>
 
-                                 <label for="role">Choose Role</label>
-                                 <select id="role" name="role" required>
-                                       <option value="admin">Admin</option>
-                                       <option value="manager">Manager</option>
-                                       <option value="receptionist">Receptionist</option>
-                                       <option value="mechanic">Mechanic</option>
-                                 </select>
+                                     <label for="role">Choose Role</label>
+                                     <select id="role" name="role" required>
+                                           <option value="admin">Admin</option>
+                                           <option value="manager">Manager</option>
+                                           <option value="receptionist">Receptionist</option>
+                                           <option value="mechanic">Mechanic</option>
+                                     </select>
 
-                                 <label for="salary">Basic Salary</label>
-                                 <input type="number" id="salary" name="salary" required>
+                                     <label for="salary">Basic Salary</label>
+                                     <input type="number" id="salary" name="salary" required>
 
-                                 <button type="submit" class="btn">Submit</button>
+                                     <label for="userPwd">Password</label>
+                                     <input type="text" id="userPwd" name="userPwd">
+
+                                     <button type="submit" class="btn">Submit</button>
                                  </form>
                         </ul>
                         </div>
@@ -235,8 +267,9 @@
 
                         <div class="card">
                         <ul class="settings">
-                            <class="item"><a href="#"><h2>Remove User</h2></a>
-                            <form>
+                            <class="item"><h2 style="color: darkblue;">Remove User</h2>
+                            <form method="POST">
+                               <input type="hidden" name="action" value="remove_user">
                                <label for="employee_id">Employee ID</label>
                                <input type="text" id="employee_id" name="employee_id" required>
 

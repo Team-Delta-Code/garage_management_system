@@ -217,7 +217,7 @@ include('main/sessionChecker.php');
             <div class="breadcrumb">
                 ⏲️<a href="dashboard.php">Home</a> > <a href="#">Settings</a>
             </div>
-            <?php include('profile_icon.php') ?>
+            <?php include('profile_icon.php'); ?>
         </div>
 
         <div class="dashboard-grid">

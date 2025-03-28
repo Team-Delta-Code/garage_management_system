@@ -48,7 +48,7 @@ if (empty($results)) {
         echo "
         <div>
             <a href='#' class='user-profile' onclick='toggleDropdown(event)'>
-                <div class='user-avatar'>".$firstName[0].$lastName[0]."</div>
+                <div class='user-avatar' style='z-index:1000'>".$firstName[0].$lastName[0]."</div>
                 <div class='user-name'>".$firstName." ".$lastName."</div>
             </a>
             <div class='dropdown-menu' id='dropdownMenu'>

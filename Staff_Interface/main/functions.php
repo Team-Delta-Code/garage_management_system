@@ -72,4 +72,20 @@ function simple_dehash($hashed_string) {
     return $result;
 }
 
+function passwordVerify($inputPassword, $storedPassword) {
+    // Debug: Print out the input and stored passwords
+    error_log("Input Password: " . $inputPassword);
+    error_log("Stored Password: " . $storedPassword);
+
+    // Use simple_hash for verification
+    $hashedInput = simple_hash($inputPassword);
+    
+    // Direct comparison
+    $result = ($hashedInput === $storedPassword);
+    
+    error_log("Verification Result: " . ($result ? 'True' : 'False'));
+    
+    return $result;
+}
+
 ?>
