@@ -297,7 +297,7 @@
                 alert(errorMessage);
             } else {
                 // If all validations pass, proceed to booking confirmation
-                alert('Booking Confirmed! A representative will contact you shortly.');
+                alert('Make payment to conform your aapoinment');
                 // You could add additional logic here like form submission
                 window.location.href = 'makepayment.html';
             }
