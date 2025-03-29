@@ -2,6 +2,36 @@
     include("main/sessionChecker.php");
     include("main/userManagement.php");
 
+    //access_control
+    $empId = $_SESSION['employee_id'];
+    $roleId = "";
+
+    //get all mechanics from the table
+    $stmt = $connect->prepare("SELECT `role_id` FROM employees WHERE `employee_id`='".$empId."' LIMIT 1;");
+    $stmt->execute();
+    $stmt->bind_result($roleId);
+    // Initialize variables to hold the results
+    $results = [];
+    while ($stmt->fetch()) {
+        $results[] = [
+            'role_id' => $roleId
+        ];
+    }
+    $stmt->close();
+
+    if (empty($results)) {
+        $empId = "";
+        $roleId = "";
+    } else {
+        // If there are results, access them
+        foreach ($results as $result) {
+            $roleId = $result['role_id'];
+            if($roleId != "role_admin" && $roleId != "role_mgr"){
+                header("Location: dashboard.php");
+            }
+        }
+    }
+
     // Handle form submissions
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($_POST['action']) && $_POST['action'] == 'add_user') {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2025 at 07:20 PM
+-- Generation Time: Mar 29, 2025 at 04:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -107,12 +107,20 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `employee_id`, `role_id`, `emp_first_name`, `emp_last_name`, `basic_salary`) VALUES
-(1, 'emp_admin', 'role_admin', 'Madushanka', 'Premakumara', 10),
-(2, 'emp_admin', 'role_admin', 'John', 'Smith', 75000),
-(3, 'emp_mech1', 'role_mech', 'Mike', 'Johnson', 55000),
-(4, 'emp_recep1', 'role_recep', 'Sarah', 'Davis', 45000),
-(5, 'emp_mgr1', 'role_mgr', 'David', 'Wilson', 65000),
-(6, 'emp_mech2', 'role_mech', 'James', 'Brown', 50000);
+(9, 'emp_admin1', 'role_admin', 'System', 'Admin', 80000),
+(10, 'emp_mgr1', 'role_mgr', 'Manager', 'Account', 60000),
+(11, 'emp_recep1', 'role_recep', 'Receptionist ', 'Account', 30000),
+(12, 'emp_mech1', 'role_mech', 'Mechanic', 'Account01', 40000),
+(13, 'emp_mech2', 'role_mech', 'Mechanic', 'Account02', 30000),
+(14, 'emp_mgr2', 'role_mgr', 'Samantha', 'Chandrapala', 65000),
+(15, 'emp_mech3', 'role_mech', 'Thilak', 'Gunawardhana', 50000),
+(16, 'emp_mech4', 'role_mech', 'Vikum', 'Sayura', 30000),
+(17, 'emp_recep2', 'role_recep', 'Piyumi', 'Nimasha', 35000),
+(18, 'emp_mech5', 'role_mech', 'Priyankara', 'Jayalath', 75000),
+(19, 'emp_mech6', 'role_mech', 'Supun', 'Dilshan', 40000),
+(20, 'emp_mech7', 'role_mech', 'Dharmapala', 'Dharmapala', 65000),
+(21, 'emp_mech8', 'role_mech', 'Chandralal', 'Mahinda', 60000),
+(22, 'emp_mech9', 'role_mech', 'Piyath', 'Samarakoon', 45000);
 
 -- --------------------------------------------------------
 
@@ -167,7 +175,6 @@ CREATE TABLE `employee_roles` (
 
 INSERT INTO `employee_roles` (`id`, `role_id`, `employee_role`) VALUES
 (1, 'role_admin', 'System_Administrator'),
-(2, 'role_admin', 'System_Administrator'),
 (3, 'role_mech', 'Mechanic'),
 (4, 'role_recep', 'Receptionist'),
 (5, 'role_mgr', 'Manager');
@@ -286,12 +293,20 @@ CREATE TABLE `system_access_control` (
 --
 
 INSERT INTO `system_access_control` (`id`, `employee_id`, `role_id`, `password`) VALUES
-(2, 'emp_admin', 'role_admin', '726c7d6c72704c6f787479'),
-(3, 'emp_admin1', 'role_admin', '6d7079757a5c6d7f7f3d3e3f'),
-(4, 'emp_mech1', 'role_mech', '78706e735b6c7e7e3c3d3e'),
-(5, 'emp_recep1', 'role_recep', '7e716f717c5c6d7f7f3d3e3f'),
-(6, 'emp_mgr1', 'role_mgr', '77717c5a6b7d7d3b3c3d'),
-(8, 'emp_mech2', 'role_mech', '79716f745c6d7f7f413e443f');
+(11, 'emp_admin1', 'role_admin', '6b6e7773784a3b3c3d3e'),
+(12, 'emp_mgr1', 'role_mgr', '796d7a6d73717e4c3d3e3f40'),
+(13, 'emp_recep1', 'role_recep', '7c6f6d6f7a4a3b3c3d3e'),
+(14, 'emp_mech1', 'role_mech', '766e6c71493a3b3c3d'),
+(15, 'emp_mech2', 'role_mech', '766e6c71493a3b3c3d'),
+(16, 'emp_mgr2', 'role_mgr', '806e7a6e7b81756e4d3e3f4041'),
+(17, 'emp_mech3', 'role_mech', '7f7374776c764b3c3d3e3f'),
+(18, 'emp_mech4', 'role_mech', '8073757f774a3b3c3d3e'),
+(19, 'emp_recep2', 'role_recep', '7b74848078744b3c3d3e3f'),
+(20, 'emp_mech5', 'role_mech', '7f817888707d7a7081704f40414243'),
+(21, 'emp_mech6', 'role_mech', '7d7f7a7f784a3b3c3d3e'),
+(22, 'emp_mech7', 'role_mech', '737770817c707f707b704f40414243'),
+(23, 'emp_mech8', 'role_mech', '7277707d7381707b707b4f40414243'),
+(24, 'emp_mech9', 'role_mech', '7b74846c7f734b3c3d3e3f');
 
 -- --------------------------------------------------------
 
@@ -501,7 +516,7 @@ ALTER TABLE `customer_support`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `employee_attendance`
@@ -543,7 +558,7 @@ ALTER TABLE `service_order`
 -- AUTO_INCREMENT for table `system_access_control`
 --
 ALTER TABLE `system_access_control`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `transactions`

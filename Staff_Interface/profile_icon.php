@@ -20,7 +20,6 @@ while ($stmt->fetch()) {
 }
 $stmt->close();
 
-// Check if there are no appointments
 if (empty($results)) {
     $empId = "";
     $firstName = "";

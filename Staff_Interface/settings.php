@@ -223,7 +223,7 @@ include('main/sessionChecker.php');
         <div class="dashboard-grid">
             <div class="container">
                 <div class="header-div">
-                    <h3><a href="editProfile.php">Profile Info</a></h3>
+                    <h3><a href="profileInfo.php">Profile Info</a></h3>
                 </div>
                 <div class="header-div">
                     <span class="header"><h3><a href="changePassword.php">Change Password</a></h3> </span>
