@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Payment Successful - Ushan Motors</title>
+    <title>Booking Fee Payment Successful - Ushan Motors</title>
+    <!-- Include jsPDF library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
       /* Reset default styles */
       * {
@@ -14,28 +16,19 @@
       }
 
       body {
-        background-color: #a5b4fc; /* Make sure the image covers the entire screen */
-      }
-
-      /*style for header*/
-      /* Reset default styles and set up base styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
+        background-color: #a5b4fc;
       }
 
       /* Main navigation styles */
       .nav-container {
-        background-color: #1a237e; /* Deep blue color for nav */
+        background-color: #1a237e;
         padding: 15px 5%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: fixed; /* Keep nav fixed at top */
+        position: fixed;
         width: 100%;
-        z-index: 1000; /* Ensure nav stays on top */
+        z-index: 1000;
       }
 
       /* Logo and badge container */
@@ -47,8 +40,8 @@
 
       /* 25 Years badge styling */
       .year-badge {
-        width: 50px; /* Adjusted size */
-        height: 50px; /* Adjusted size */
+        width: 50px;
+        height: 50px;
         background-color: rgb(0, 0, 0);
         border-radius: 50%;
         display: flex;
@@ -56,9 +49,9 @@
         justify-content: center;
         align-items: center;
         line-height: 1.2;
-        position: absolute; /* Positioning */
-        top: 10px; /* Adjusted position */
-        left: 10px; /* Adjusted position */
+        position: absolute;
+        top: 10px;
+        left: 10px;
       }
 
       .year-badge img {
@@ -87,19 +80,6 @@
 
       .main-content {
         padding: 6rem 5%;
-      }
-
-      /* Navigation styles */
-      nav ul {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-      }
-
-      nav a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.2rem;
       }
 
       /* Main content styles */
@@ -178,7 +158,6 @@
       /* Payment illustration styles */
       .payment-illustration {
         position: absolute;
-
         top: 10rem;
         width: 500px;
         height: 500px;
@@ -190,6 +169,8 @@
         border-radius: 10px;
         padding: 1rem;
         text-align: center;
+        width: 100%;
+        margin-bottom: 1rem;
       }
 
       /* Footer styles */
@@ -243,20 +224,29 @@
     <div class="main-content">
       <!-- Success message card -->
       <div class="success-card">
-        <h1>Payment successful!</h1>
+        <h1>Booking Fee Paid!</h1>
 
         <p class="confirmation-text">
-          Thank you for your payment. Your appointment has been confirmed.
+          Thank you for paying the booking fee of LKR 500. Your booking is now
+          confirmed.
         </p>
 
-        <input type="text" placeholder="Transaction ID" class="form-input" />
+        <input
+          type="text"
+          id="transactionId"
+          placeholder="Transaction ID"
+          class="form-input"
+          readonly
+        />
 
         <p class="status-message">
-          You will receive a confirmed e-mail shortly.
+          You will receive a confirmation e-mail shortly.
         </p>
-        <p class="status-message">Your appointment detail has been saved.</p>
+        <p class="status-message">Your booking details have been saved.</p>
 
-        <a href="#" class="download-btn">Download receipt</a>
+        <button onclick="generatePDFReceipt()" class="download-btn">
+          Download PDF Receipt
+        </button>
 
         <!-- Payment illustration -->
         <img
@@ -269,5 +259,89 @@
 
     <!-- Footer -->
     <footer>© 2024 Ushan Motors. All Rights Reserved</footer>
+
+    <script>
+      // Function to generate a unique transaction ID
+      function generateTransactionId() {
+        // Current timestamp
+        const timestamp = Date.now().toString(36);
+
+        // Random string
+        const randomStr = Math.random().toString(36).substring(2, 7);
+
+        // Combine timestamp and random string
+        const transactionId = `USH-${timestamp}-${randomStr}`.toUpperCase();
+
+        return transactionId;
+      }
+
+      // Function to generate and display transaction ID on page load
+      function initializeTransactionId() {
+        const transactionId = generateTransactionId();
+        document.getElementById("transactionId").value = transactionId;
+      }
+
+      // Function to generate and download PDF receipt
+      function generatePDFReceipt() {
+        // Use jsPDF from the global window object
+        const { jsPDF } = window.jspdf;
+
+        // Create a new PDF document
+        const doc = new jsPDF();
+
+        // Get current date and transaction ID
+        const transactionId = document.getElementById("transactionId").value;
+        const currentDate = new Date();
+
+        // Company details
+        doc.setFontSize(18);
+        doc.text("Ushan Motors", 105, 20, { align: "center" });
+        doc.setFontSize(12);
+        doc.text("Payment Receipt", 105, 30, { align: "center" });
+
+        doc.setLineWidth(0.5);
+        doc.line(20, 40, 190, 40);
+
+        // Receipt details
+        const details = [
+          `Transaction ID: ${transactionId}`,
+          `Date: ${currentDate.toLocaleDateString()}`,
+          `Time: ${currentDate.toLocaleTimeString()}`,
+          `Service: Booking Fee`,
+          `Amount Paid: LKR 500`,
+          `Payment Status: Successful`,
+        ];
+
+        // Position for text
+        let y = 60;
+        doc.setFontSize(12);
+        details.forEach((detail) => {
+          doc.text(detail, 20, y);
+          y += 10;
+        });
+
+        // Add company logo or watermark (optional)
+        // Commented out as actual logo file is not available
+        // doc.addImage(logoPath, 'PNG', 150, 20, 30, 30);
+
+        // Footer
+        doc.setFontSize(10);
+        doc.text("Thank you for your business!", 105, y + 30, {
+          align: "center",
+        });
+        doc.text("© 2024 Ushan Motors. All Rights Reserved", 105, y + 40, {
+          align: "center",
+        });
+
+        // Generate a filename with transaction ID
+        const filename = `receipt_${transactionId}.pdf`;
+
+        // Save the PDF
+        doc.save(filename);
+      }
+
+      // Initialize transaction ID when page loads
+      window.onload = initializeTransactionId;
+    </script>
   </body>
 </html>
